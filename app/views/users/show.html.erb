@@ -1,0 +1,18 @@
+<h2 id="sub_header"> 
+    My Current USER/INDEX Jobsites 
+    <button style="float:right;">
+        <a href=<%= new_jobsite_path %>>Add Jobsite</a>
+    </button>
+</h2>
+
+<ul style="display:inline;">
+    <% @jobsites.each do |jobsite| %>
+        <li>
+            <div id="jobsite_card">
+            <h3><a href=<%= jobsite_path(jobsite.id) %>><%= jobsite.name %></a></h3>
+            <p><%= jobsite.jobs.count %> Current Jobs </p>
+            <p><%= jobsite.employees.count %> Site Employees </p>
+            </div>
+        </li>
+    <% end %>
+</ul>

@@ -1,0 +1,13 @@
+<h1>Welcome to the Foreman App</h1>
+
+<h2 style="text-align:center;">Login to continue</h2>
+<%= form_for @user, url: signin_path, method: :post do |f| %>
+    <%= f.label :email %>  <%= f.text_field :email  %> <br><br>
+    <%= f.label :password %><%= f.password_field :password %><br><br>
+    <%= signup_errors(@user) unless signup_errors(@user).blank? %><br><br>
+
+    <%= f.submit 'Log In with Email' %>
+<% end %>
+
+<br>
+<%= button_to "Log in with Google", "/auth/google_oauth2"%>

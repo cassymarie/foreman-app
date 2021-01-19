@@ -1,0 +1,29 @@
+<div id="form">
+<h2>Add Job</h2>
+    <form action="/jobsite/<%= @jobsite.id %>/jobs/new" method="POST">
+        <table>
+            <tr>
+                <th style="width:10%">Job No.</th>
+                <th style="width:40%">Job Name</th>
+                <th style="width:40%">Customer</th>
+            </tr>
+            <tr>
+                <td><input style="width:90%"  type="text" name="job[job_number]" required></td> 
+                <td><input style="width:95%" type="text" name="job[name]" required></td>
+                <td><input style="width:95%" type="text" name="job[customer]"></td>
+                <input type="hidden" name="jobsite_id" value=<%=@jobsite.id%> >
+            </tr>
+        </table>
+        <br>
+        <section style="text-align:left;">
+        <h4>Select Areas</h4>
+        <% @jobsite.site_areas.sort_by{|a| a.code}.each do |area| %>
+            <input type="checkbox" name="areas[]" id="area_<%= area.id %> " value="<%= area.id %>"><label class="checkbox_label"><%= area.code %></label>          
+        <% end %>
+        <br>
+        <p style="color:red;"> To add additional Areas to a Job, First add your job, then edit the job below.</p>
+        <br>
+        <input type="submit" value="Add Job" style="text-align:right;">
+        </section>
+    </form>
+</div>

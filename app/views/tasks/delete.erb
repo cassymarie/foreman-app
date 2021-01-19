@@ -1,0 +1,13 @@
+<div  id = "form">
+    <h2>Delete Task</h2>
+    <h4> Are you sure you want to delete this task? <br> All associated records for this task will be deleted </h4> <br>
+    <form action="/task/delete/<%=@task.id%>" method="post">
+        <input id="hidden" type="hidden" name="_method" value="delete">
+
+               <h3 style="color:red;"> [<%=@task.code%>]  <%=@task.name%> </h3>
+
+        <input type="hidden" name="task_id" value=<%=@task.id%>> 
+        <input type="hidden" name="jobsite_id" value=<%=@jobsite.id%>>
+        <br><input type="submit" value="Delete">
+    </form>
+</div>

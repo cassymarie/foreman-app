@@ -1,0 +1,11 @@
+<h2 id="sub_header"> My Current SESSION/INDEX Jobsites <button style="float:right;"><a href="/jobsite/new>">Add Jobsite</a></button></h2>
+    <ul style="display:inline;">
+        <% @jobsites.each do |jobsite|%>
+        <li><div id="jobsite_card">
+            <h3><a href="/jobsite/<%=jobsite.id%>"><%= jobsite.name %></a></h3>
+            <p><%= jobsite.jobs.count %> Current Jobs </p>
+            <p><%= jobsite.employees.count %> Site Employees </p>
+        </div></li>
+        <%end%>
+    </ul>
+

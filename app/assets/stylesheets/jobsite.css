@@ -1,0 +1,36 @@
+
+  #jobsite_section {
+      display: inline-flex;
+      width: 95%;
+      align-items: baseline;
+  }
+
+  #jobsite_section_left {
+    padding: 10px;
+    margin: auto;
+    width: 70%;
+  }
+
+  #jobsite_section_right {
+    padding: 10px;
+    width: 25%;
+    height: 100%;
+    vertical-align:top;
+  }
+
+  #jobsite_card {
+    background:rgb(225, 230, 236);
+    border: 1px solid rgba(0,0,0,.3);
+    box-shadow: 5px 5px 5px rgba(0,0,0,.3);
+    width: fit-content;
+    padding: 15px;
+    margin: 20px;
+  }
+
+
+  #jobsite_form {
+    background: rgb(247, 241, 241);
+    box-shadow: 0 0 5px rgba(0,0,0,.3);
+    margin: 10px;
+    padding: 15px;
+  }

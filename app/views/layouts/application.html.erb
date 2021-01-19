@@ -6,11 +6,25 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%# stylesheet_link_tag 'main', media: "all" %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+        <%= link_to 'Sign Up', new_user_path %>
+        <%= link_to 'Log In', signin_path %>
+        <%= link_to 'Log Out', signout_path, method: 'post' %>
+    </header>
+    <% flash.each do |type, msg| %>
+      <div>
+        <%= msg %>
+      </div>
+    <% end %>
+    <div class="wrapper">
+        <%= yield %>
+    </div>
+
   </body>
 </html>

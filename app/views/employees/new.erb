@@ -1,0 +1,26 @@
+    <div id = "form">
+        <h2>Add Employee</h3>
+        <form class="edit_employee" action="/employee/new" method="POST">
+            <table>
+                <tr>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Title</th>
+                </tr>
+                <tr>  
+                    <td><input type="text" name="employee[last_name]" required></td> 
+                    <td><input type="text" name="employee[first_name]" required></td>
+                    <td>
+                        <select id="titles" name="title" required>
+                            <option value=""></option>
+                            <%Title.all.each do |t|%>                    
+                            <option value=<%=t.id%>><%=t.title%></option>
+                            <%end%>
+                        </select>     
+                    </td>
+                    <td><input type="submit" value="Add Employee"></td>
+                    <input type="hidden" name="jobsite[id]" value=<%=@jobsite.id%>>
+                </tr>
+            </table> 
+        </form>
+    </div>
