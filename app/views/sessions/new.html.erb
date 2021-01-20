@@ -2,12 +2,12 @@
 
 <h2 style="text-align:center;">Login to continue</h2>
 <%= form_for @user, url: signin_path, method: :post do |f| %>
-    <%= f.label :email %>  <%= f.text_field :email  %> <br><br>
-    <%= f.label :password %><%= f.password_field :password %><br><br>
-    <%= signup_errors(@user) unless signup_errors(@user).blank? %><br><br>
-
-    <%= f.submit 'Log In with Email' %>
+    <%= f.text_field :email, placeholder: "Email"  %> <br><br>
+    <%= f.password_field :password, placeholder: "Password"  %><br><br>
+    <%= f.submit 'Sign In' %>
+    <%= error_message(@user) unless error_message(@user).blank? %>
 <% end %>
 
 <br>
 <%= button_to "Log in with Google", "/auth/google_oauth2"%>
+<%= link_to "Create New User", new_user_path%>

@@ -1,6 +1,6 @@
 <h2 id="sub_header">
     <a href="/jobsites">My Jobsites</a>
-    <button  id="subheader_button"><a href="/jobsites">Back</a></button>
+    <button  class="subheader_button"><a href="/jobsites">Back</a></button>
 </h2>
 
 <div id="form">
@@ -11,11 +11,11 @@
             <br><h1 style="color:red;"> <%=@jobsite.name%> </h1><br>
             <input id="submit_button" type="submit" value="Delete!">
         </form><br><br>
-        <% if current_user.jobsites.size > 0 %>
+        <% if @current_user.jobsites.size > 0 %>
             <div id="display_list">   
                 <h2>My Jobsites</h2> 
                 <table>
-                    <%current_user.jobsites.each do |jobsite|%>
+                    <% @current_user.jobsites.each do |jobsite|%>
                         <tr>
                             <td  style="width:1%" ><button><a href="/jobsite/delete/<%= jobsite.id %>">X</a></button></td>
                             <td  style="width:1%" ><button><a href="/jobsite/edit/<%= jobsite.id %>">...</a></button></td>

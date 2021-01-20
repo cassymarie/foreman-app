@@ -1,10 +1,10 @@
 
-<h2 id="sub_header"> My Jobsites <button id="subheader_button"><a href="/jobsites/new">Edit Sites</a></button></h2>
+<h2 id="sub_header"> My Jobsites <button class="subheader_button" ><%= link_to 'Edit Jobsites', new_jobsite_path %></button></h2>
 <div id="jobsites">
    <ul style="display:inline-flex;">
-        <% current_user.jobsites.each do |jobsite|%>
+        <% @current_user.jobsites.each do |jobsite|%>
             <li id="jobsite_card">
-                <h3><a href="/jobsite/<%=jobsite.id%>"><%= jobsite.name %></a></h3>
+                <h3><%= link_to jobsite.name, jobsite_path(jobsite)%></h3>
                 <p><%= jobsite.jobs.count %> Current Jobs </p>
                 <p><%= jobsite.employees.count %> Site Employees </p>
             </li>

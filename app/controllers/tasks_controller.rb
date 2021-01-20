@@ -4,7 +4,6 @@ class TasksController < ApplicationController
         redirect '/error' if !logged_in?
         @jobsite = Jobsite.find(params[:id])
         redirect '/jobsites' unless @jobsite.users.include?(current_user)
-
         @tasks = @jobsite.tasks
         erb :'tasks/add', :layout => :'layouts/layout_tasks'
     end

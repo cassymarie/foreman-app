@@ -1,0 +1,25 @@
+<div id="jobsite_form">
+    <h2 id="form_header">
+        Site Crew
+        <button id="form_header_btn"><%= link_to dash_button_label(@jobsite.employees), new_jobsite_employee(@jobsite) %></button>
+    </h2>
+
+    <% if @jobsite.employees.size > 0%>
+    <table>
+        <thead>
+            <tr>
+                <th style="text-align: left;" width=200px>Employee Name</th>
+                <th style="text-align: left;" padding-left=10px;>Title</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%@jobsite.employees.sort_by{|e| e.last_name}.each do |employee|%>
+            <tr>
+                <td style="text-align: left;" width=200px><%= employee.full_name %></td>
+                <td style="text-align: left;" padding-left=10px><%= employee.title %></td>
+            </tr>
+            <%end%>
+        </tbody>
+    </table>
+    <%end%>
+</div>
