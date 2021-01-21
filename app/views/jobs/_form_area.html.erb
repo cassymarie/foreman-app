@@ -1,0 +1,13 @@
+
+<div class="form">
+  
+    <%= form_for @job.areas.build do |area| %>            
+        <strong>Add Area: </strong>
+        <%# area.label :code %>
+        <%= area.text_field :code, placeholder: 'Code (XXX)' %>
+        <%# area.label :name %>
+        <%= area.text_field :name, placeholder: 'Description' %>
+
+        <%= area.submit %>
+    <% end %>  
+</div>

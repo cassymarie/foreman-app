@@ -4,5 +4,13 @@ class Job < ActiveRecord::Base
 
     has_many :job_areas
     has_many :areas, through: :job_areas
+    accepts_nested_attributes_for :areas, reject_if: proc { |attributes| attributes['code'].blank? || attributes['name'].blank? }
+
     belongs_to :jobsite
+
+    after_create :create_reporting_area
+
+    def create_reporting_area
+        self.areas << Area.find_by(code: '000')
+    end
 end

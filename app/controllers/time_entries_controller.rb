@@ -16,7 +16,9 @@ class TimeEntriesController < ApplicationController
             @sub_days = params[:work_date].to_i 
             @workdate = @week_ending - @sub_days.days
         end
+
         @posted = false
+        
         erb :'time_entries/show', :layout => :'layouts/layout_time_entries'
     end
 

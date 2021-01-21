@@ -15,12 +15,14 @@ ActiveRecord::Schema.define(version: 2020_12_11_004329) do
   create_table "areas", force: :cascade do |t|
     t.string "code", limit: 3
     t.string "name"
+    t.boolean "active", default: true
   end
 
   create_table "employees", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.integer "title_id"
+    t.boolean "active", default: true
   end
 
   create_table "entry_types", force: :cascade do |t|
@@ -38,8 +40,7 @@ ActiveRecord::Schema.define(version: 2020_12_11_004329) do
     t.string "name"
     t.string "customer"
     t.integer "jobsite_id"
-    t.string "city"
-    t.string "state"
+    t.boolean "active", default: true
   end
 
   create_table "jobsite_employees", force: :cascade do |t|
@@ -49,12 +50,16 @@ ActiveRecord::Schema.define(version: 2020_12_11_004329) do
 
   create_table "jobsites", force: :cascade do |t|
     t.string "name"
+    t.string "city"
+    t.string "state"
+    t.boolean "active", default: true
   end
 
   create_table "tasks", force: :cascade do |t|
     t.string "code", limit: 3
     t.string "name"
     t.integer "jobsite_id"
+    t.boolean "active", default: true
   end
 
   create_table "time_entries", force: :cascade do |t|

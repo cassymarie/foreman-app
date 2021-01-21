@@ -1,11 +1,11 @@
 <div id="jobsite_form">
     <h2 id="form_header">
         Site Crew
-        <button id="form_header_btn"><%= link_to dash_button_label(@jobsite.employees), new_jobsite_employee(@jobsite) %></button>
+        <button id="form_header_btn"><%= link_to dash_button_label(@jobsite.employees), new_sitecrew_employee_path(@jobsite) %></button>
     </h2>
 
     <% if @jobsite.employees.size > 0%>
-    <table>
+    <table class="table table-condensed">
         <thead>
             <tr>
                 <th style="text-align: left;" width=200px>Employee Name</th>

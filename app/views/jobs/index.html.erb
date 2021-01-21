@@ -1,0 +1,7 @@
+
+<div id="jobsite_form">
+    <h2 id="form_header">Jobs
+    <button id="form_header_btn"><%= link_to 'Add', new_jobsite_job_path(@jobsite) %></button>
+    </h2> 
+    <%= render partial: "jobsites/jobsite_jobs", locals: {jobsite: @jobsite} %>
+</div>

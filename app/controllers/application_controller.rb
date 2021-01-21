@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+    include ApplicationHelper
     protect_from_forgery with: :exception
     before_action :current_user
 
@@ -12,5 +13,11 @@ class ApplicationController < ActionController::Base
     
       def authentication_required                             
         redirect_to root_path unless logged_in?
+      end
+
+      def user_jobsites
+        jobsite =  params[:controller] == 'jobsites' ? Jobsite.find(params[:id]) : Jobsite.find(params[:jobsite_id])
+
+        redirect_to jobsites_path unless jobsite.users.include?(@current_user)
       end
 end

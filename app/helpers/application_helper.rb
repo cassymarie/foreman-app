@@ -13,30 +13,35 @@ module ApplicationHelper
     def header_links
         a = params[:action]
         list = html_escape('')
-
         case params[:controller]
         when 'users','admin'
             if a == 'new'
-                list << link_to('Log In', signin_path)
+              return  list << link_to('Log In', signin_path)
             else
                 list << link_to('Jobsites', jobsites_path)
-                list << link_to('Log Out', signout_path, method: :delete) 
             end
         when 'sessions'
-            list << link_to('Sign Up', new_user_path)
+            return list << link_to('Sign Up', new_user_path)
         when 'admin'
             list << link_to('Admin(test)', dashboard_root_path)
-        when 'jobsites'
-            if a != 'index'
-                list << link_to('Jobsites', jobsites_path)
-            end
+        when 'jobsites','jobs','tasks','jobsite_employees'
+            jobsite = params[:id] || params[:jobsite_id]
             
-            list << link_to('Log Out', signout_path, method: :delete)
+            if jobsite.nil?
+                list << link_to('Jobsites', jobsites_path) 
+            else
+                list << link_to('Jobsites', jobsites_path)
+                jobsite = Jobsite.find_by(id: jobsite.to_i)
+                list << content_tag(:strong, link_to(jobsite.name, jobsite_path(jobsite)))
+                list << link_to(' - Job Information', jobsite_jobs_path(jobsite))
+                list << link_to(' - Site Crew', sitecrew_employees_path(jobsite))
+                list << link_to(' - Time Enrty', sitecrew_time_entry_index_path(jobsite))
+            end
         else
-            list << link_to('Sign Up', new_user_path)
-            list << link_to('Log In', signin_path)
+            list << link_to('Jobsites', jobsites_path)
         end
 
+        list << link_to('Log Out', signout_path, method: :delete)
         list
     end
 
@@ -53,6 +58,8 @@ module ApplicationHelper
         end
             title
     end
+
+
 
 end
 

@@ -5,8 +5,7 @@ class CreateJobs < ActiveRecord::Migration[6.1]
       t.string :name
       t.string :customer
       t.integer :jobsite_id
-      t.string :city
-      t.string :state
+      t.boolean :active, default: true
     end
   end
 end

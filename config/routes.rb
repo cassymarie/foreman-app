@@ -13,13 +13,21 @@ Rails.application.routes.draw do
   #Google path
   get '/auth/google_oauth2/callback'=> 'sessions#omniauth'  
 
-  resources :jobsites, only: [:index]
+  resources :jobsites, only: [:index, :show]
   #Nested under jobsites
-  resources :jobsite, controller: 'jobsites' do 
-    resources :jobs, except: [:index]
-    resources :tasks
-    resources :employees
+  resources :jobsite, only: [:new, :edit, :create], controller: 'jobsites' do 
+    resources :jobs, only: [:index, :create], shallow: true
+    resources :job, only: [:new, :update, :edit], controller: 'jobs', shallow: true
+    resources :tasks, only: [:new, :create, :edit, :update, :destroy], shallow: true
   end
+
+  resources :sitecrew, only: [:new], controller: 'jobsites' do 
+    resources :employees, only: [:index, :new, :destroy], controller: 'jobsite_employees'
+    resources :time_entry, only: [:index, :new]
+  end
+
+  get '/new_job_area' => 'jobs#new_area'
+  post '/new_job_area' => 'jobs#create_area'
 
   # namespace :dashboard do
   #   root to: "users#show"

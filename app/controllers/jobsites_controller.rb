@@ -5,6 +5,9 @@ class JobsitesController < ApplicationController
 
     def index
        @jobsites = @current_user.jobsites
+       if @jobsites.size == 1
+            redirect_to jobsite_path(@jobsites[0])
+       end
     end
     # get '/jobsites' do
     #     redirect '/error' if !logged_in? 
@@ -79,14 +82,14 @@ class JobsitesController < ApplicationController
 
    private
     def jobsite_params
-        params.require(:jobsite).permit(:id, :name)
+        params.require(:jobsite).permit(:id, :name, :city,)
     end
 
     def set_jobsite
         @jobsite = Jobsite.find_by(id: params[:id]) 
     end
 
-    def user_jobsites
-        redirect_to jobsites_path unless @jobsite.users.include?(@current_user)
-    end
+    # def user_jobsites
+    #     redirect_to jobsites_path unless @jobsite.users.include?(@current_user)
+    # end
 end

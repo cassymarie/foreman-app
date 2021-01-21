@@ -4,6 +4,7 @@ class CreateTasks < ActiveRecord::Migration[6.1]
       t.string :code, :limit => 3
       t.string :name
       t.integer :jobsite_id
+      t.boolean :active, :default => true
     end
   end
 end
