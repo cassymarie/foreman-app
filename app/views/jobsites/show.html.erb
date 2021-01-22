@@ -11,7 +11,7 @@
     <div class="jobsite_form">
         <h2 id="form_header"> <%= link_to'Employees', jobsite_employees_path(@jobsite) %></h2> 
         <% if @jobsite.employees.size > 0%>
-            <%= render partial: "jobsite_employees", locals: {jobsite: @jobsite} %>
+            <%= render partial: "employees/site_employees", locals: {jobsite: @jobsite, view_by: 'none'} %>
         <% end %>
     </div>
 

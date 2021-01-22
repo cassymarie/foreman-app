@@ -5,10 +5,9 @@ module JobsHelper
         columns = html_escape('')
 
         j.collection_check_boxes(:id, @jobsite.jobs, :id, :job_number) do |job|
-            columns << ( job.check_box + job.label )
+            columns << ( job.check_box + job.label ) unless job.object.id.nil?
             num += 1
-
-            if num == (@jobsite.jobs.size/2).ceil
+            if num == 6
                 boxes << content_tag(:div, columns)
                 columns = html_escape('')
                 num = 1

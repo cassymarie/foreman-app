@@ -3,7 +3,7 @@ class Employee < ActiveRecord::Base
     has_many :jobsites, through: :jobsite_employees
     has_many :titles
 
-    default_scope -> { order(full_name: :desc) }
+    default_scope -> { order(last_name: :asc) }
 
     def full_name
         "#{self.last_name}, #{self.first_name}"
