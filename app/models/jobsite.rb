@@ -17,12 +17,12 @@ class Jobsite < ActiveRecord::Base
         areas=[]
         self.jobs.each do |job|
             job.areas.each do |area|
-                if !areas.include?(area) || area.code != '000' || area.persisted?
+                if !areas.include?(area) && area != Area.find(1)
                     areas << area  
                 end
             end
         end
-        areas.uniq!
+        areas
     end
 
     def create_reporting_tasks

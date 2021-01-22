@@ -19,6 +19,12 @@
   </head>
 
   <body>
+    <% flash.each do |type, msg| %>
+      <div class="alert alert-danger">
+        <%= msg %>
+      </div>
+    <% end %>
+
     <header>
       <%= render partial: "layouts/header"%>
      <!-- <div class="dropdown" >
@@ -30,11 +36,7 @@
       <div id="headerWelcome"> <%= header_right %></div> -->
     </header>
     
-    <% flash.each do |type, msg| %>
-      <div>
-        <%= msg %>
-      </div>
-    <% end %>
+
     <div class="wrapper">
         <%= yield %>
     </div>

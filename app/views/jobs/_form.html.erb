@@ -1,7 +1,7 @@
 
     <div id="form">
     <%= form_with(model: @job.new_record? ? [@jobsite, @job] : @job, local: true) do |f| %>
-
+        <%= f.hidden_field :jobsite_id, value: @jobsite_id%>
         <div class='container-fluid'>
             <div class="row">
                 <div class="col-md-3">
@@ -19,17 +19,19 @@
             </div>
         </div>
 
-        <div class='container-fluid'>
-            <div class="row">
-                <div>
-                    <strong>Jobsite Areas</strong>
-                    <%= f.fields_for :area do |a| %>
-                        <%= a.collection_check_boxes :id, @jobsite.site_areas, :id, :code %>
-                    <% end %>
+        <% if !@jobsite.site_areas.nil? %>
+            <div class='container-fluid'>
+                <div class="row">
+                    <div>
+                        <strong>Jobsite Areas</strong>
+                        <%= f.fields_for :area do |a| %>
+                            <%= a.collection_check_boxes :id, @jobsite.site_areas, :id, :code %>
+                        <% end %>
+                    </div>
                 </div>
             </div>
-        </div>
-        
+        <% end %>
+
         <%= f.submit %>
     <% end %>
 </div>

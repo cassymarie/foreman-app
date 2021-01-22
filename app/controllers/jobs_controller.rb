@@ -42,10 +42,9 @@ class JobsController < ApplicationController
         if @job.save
             redirect_to jobsite_jobs_path(@jobsite)
         else
-            flash[:alert] = 'something went wrong saving the job'
+            @job.errors.full_messages.map {|err| flash[:alert] = err} unless @job.errors.nil?
             render :new
         end
-
     end
 
     def create_area
