@@ -1,13 +1,15 @@
-
-<div class="form">
-  
-    <%= form_for @job.areas.build do |area| %>            
-        <strong>Add Area: </strong>
-        <%# area.label :code %>
-        <%= area.text_field :code, placeholder: 'Code (XXX)' %>
-        <%# area.label :name %>
-        <%= area.text_field :name, placeholder: 'Description' %>
-
-        <%= area.submit %>
-    <% end %>  
-</div>
+<%= form_for Area.new, :url => jobsite_new_job_area_path do |area| %>       
+    <h2 id="form_header">Add Area </h2>
+    <%# area.label :code %>
+    <%= area.text_field :code, placeholder: 'Code (XXX)' %><br>
+    <%# area.label :name %>
+    <%= area.text_field :name, placeholder: 'Description' %>
+    <br>
+    <hr>
+    <strong><u>Select Associated Jobs</u></strong><br><br>
+        <%= area.fields_for :jobs do |j| %>
+            <%= jobs_checkbox_columns(j) %>
+        <% end %>
+    <br>
+    <%= area.submit 'Add Area'%>
+<% end %>  

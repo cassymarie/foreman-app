@@ -20,6 +20,9 @@ class UsersController < ApplicationController
             session[:user_id] = @user.id
             redirect_to jobsites_path
         else
+            alert = ''
+            @user.errors.full_messages.each {|err| alert.unshift "#{flash[:alert] = err}"} unless @user.errors.nil?
+            flash[:alert] = alert.unshift
             render new_user_path
         end
     end

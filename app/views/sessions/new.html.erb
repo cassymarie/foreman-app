@@ -1,13 +1,15 @@
-<h1>Welcome to the Foreman App</h1>
+<div  style="text-align:center;">
+    <div  class="jobsite_card">  
+        <h1>Welcome to the Jobsite Log</h1>
 
-<h2 style="text-align:center;">Login to continue</h2>
-<%= form_for @user, url: signin_path, method: :post do |f| %>
-    <%= f.text_field :email, placeholder: "Email"  %> <br><br>
-    <%= f.password_field :password, placeholder: "Password"  %><br><br>
-    <%= f.submit 'Sign In' %>
-    <%= error_message(@user) unless error_message(@user).blank? %>
-<% end %>
-
-<br>
-<%= button_to "Log in with Google", "/auth/google_oauth2"%>
-<%= link_to "Create New User", new_user_path%>
+        <h2 style="text-align:center;">Login</h2>
+        <%= form_for @user, url: signin_path, method: :post do |f| %>
+            <%= f.text_field :email, placeholder: "Email"  %> <br><br>
+            <%= f.password_field :password, placeholder: "Password"  %><br><br>
+            <%= f.submit 'Sign In' %>
+            <%= error_message(@user) unless error_message(@user).blank? %>
+        <% end %>
+    <%= button_to "Log in with Google", "/auth/google_oauth2"%><br>
+    <%= link_to "Create New User", new_user_path%>
+    </div>
+</div>

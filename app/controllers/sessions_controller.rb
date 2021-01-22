@@ -33,9 +33,10 @@ class SessionsController < ApplicationController
             redirect_to jobsites_path
         else
             if user.nil?
-                flash[:alert] = "Email and/or Password are both required to continue.."
-                redirect_to signin_path
+                flash[:alert] = 'Email not found. Sign Up to continue.'
+                redirect_to new_user_path
             else
+                @user.errors.full_messages.map {|err| flash[:alert] = err} unless @user.errors.nil?
                 @user = user
                 render :new 
             end

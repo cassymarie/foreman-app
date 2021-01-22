@@ -1,14 +1,19 @@
-<h1>Welcome to your Jobsite Log</h1>
-<h2 style="text-align:center;">Signup to continue</h2>
-        <%= form_with model: @user, html: {class: "text-center"} do |f| %>
-                <%= f.text_field :first_name, placeholder: "First Name" %> <br>
-                <%= f.text_field :last_name, placeholder: "Last Name"  %> <br>
-                <p>Admin User? <%= f.check_box :admin %></p>
-                <%= f.email_field :email, placeholder: "Email" %>  <br>
-                <%= f.password_field :password, placeholder: "Password" %> <br><br>
-                <%= error_message(@user) unless error_message(@user).blank? %>
-                <%= f.submit %>
-        <% end %>
-        <%= link_to 'Log In', signin_path %>
-<br><br>
-<%= button_to "Sign Up with Google", "/auth/google_oauth2"%>
+<div class="row">
+    <div class="jobsite_card col-md-6 col-md-offset-3" style="text-align:center;">  
+        <h1>Welcome to the Jobsite Log</h1>
+        <h2 style="text-align:center;">Signup</h2>
+                <%= form_with model: @user, html: {class: "text-center"} do |f| %>
+                        <%= f.text_field :first_name, placeholder: "First Name" %>
+                        <%= f.text_field :last_name, placeholder: "Last Name"  %>
+                        <p><%= f.check_box :admin %> Admin? </p>
+
+                        <%= f.email_field :email, placeholder: "Email" %>  <br>
+                        <%= f.password_field :password, placeholder: "Password" %> <br><br>
+                        <%= f.submit 'Sign Up' %>
+                <% end %>
+                <%= button_to "Sign Up with Google", "/auth/google_oauth2"%><br>
+                <%= link_to 'Log In Existing User', signin_path %><br>
+        <br>
+        
+    </div>
+</div>

@@ -15,9 +15,10 @@ class Jobsite < ActiveRecord::Base
 
     def site_areas
         areas=[]
+        preset = Area.find(1)
         self.jobs.each do |job|
             job.areas.each do |area|
-                if !areas.include?(area) && area != Area.find(1)
+                if !areas.include?(area) && area != preset
                     areas << area  
                 end
             end

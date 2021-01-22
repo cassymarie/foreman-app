@@ -18,7 +18,7 @@
     vertical-align:top;
   }
 
-  #jobsite_card {
+  .jobsite_card {
     background:rgb(225, 230, 236);
     border: 1px solid rgba(0,0,0,.3);
     box-shadow: 5px 5px 5px rgba(0,0,0,.3);
@@ -28,7 +28,7 @@
   }
 
 
-  #jobsite_form {
+  .jobsite_form {
     background: rgb(247, 241, 241);
     box-shadow: 0 0 5px rgba(0,0,0,.3);
     margin: 10px;

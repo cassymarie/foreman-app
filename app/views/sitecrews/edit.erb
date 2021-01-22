@@ -1,0 +1,27 @@
+    <div  id = "form">
+    <h3>Edit Employee</h3>
+    <form action="/employee/edit/<%=@employee.id%>" method="post">
+        <input id="hidden" type="hidden" name="_method" value="patch">
+        <table>
+            <tr>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Title</th>
+            </tr>
+            <tr>  
+                <td><input type="text" name="employee[last_name]" value="<%=@employee.last_name%>"></td> 
+                <td><input type="text" name="employee[first_name]"  value="<%=@employee.first_name%>"></td>
+                <td>
+                    <select id="titles" name="employee[title_id]" required>
+                        <option value=""></option>
+                        <%Title.all.each do |t|%>                    
+                        <option value=<%=t.id%> <%='selected' if t.id == @employee.title_id%>><%=t.title%></option>
+                        <%end%>
+                    </select>     
+                </td>
+                <td><input type="submit" value="Update"></td>
+                <input type="hidden" name="jobsite[id]" value=<%=@jobsite.id%>>
+            </tr>
+        </table> 
+    </form>
+    </div>

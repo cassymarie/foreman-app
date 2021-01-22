@@ -1,35 +1,8 @@
-<div id="form">
-<%= form_with(model: @job.new_record? ? [@jobsite, @job] : @job, local: true) do |f| %>
+<div class="form">
+    <%= render "form" %>
+    <%= render "form_area" %>
+</div>
 
-    <div class='container-fluid'>
-        <div class="row">
-            <div class="col-md-3">
-                <%= f.label 'Job #' %>
-                <%= f.text_field :job_number %>
-            </div>
-            <div class="col-md-4">
-                <%= f.label 'Job Name' %>
-                <%= f.text_field :name %>
-            </div>
-            <div class="col-md-4">
-                <%= f.label 'Customer' %>
-                <%= f.text_field :customer %>
-            </div>
-       </div>
-    </div>
-
-    <div class='container-fluid'>
-        <div class="row">
-            <div>
-                <strong>Jobsite Areas</strong>
-                <%= f.fields_for :area do |a| %>
-                    <%= a.collection_check_boxes :id, @jobsite.site_areas, :id, :code %>
-                <% end %>
-            </div>
-        </div>
-    </div>
-     <%= f.submit %>
-<% end %>
-
-
+<div class="form">
+    <%= render_jobs_table(customers: false, areas: true) %>
 </div>

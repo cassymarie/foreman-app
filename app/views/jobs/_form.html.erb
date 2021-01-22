@@ -1,24 +1,23 @@
 
-    <div id="form">
-    <%= form_with(model: @job.new_record? ? [@jobsite, @job] : @job, local: true) do |f| %>
+<div>
+    <h2 id="form_header">Add Job </h2>
+    <%= form_with model: @jobsite.jobs.build, :url => jobsite_jobs_path do |f| %>
         <%= f.hidden_field :jobsite_id, value: @jobsite_id%>
         <div class='container-fluid'>
             <div class="row">
-                <div class="col-md-3">
-                    <%= f.label 'Job #' %>
-                    <%= f.text_field :job_number %>
-                </div>
-                <div class="col-md-4">
-                    <%= f.label 'Job Name' %>
-                    <%= f.text_field :name %>
-                </div>
-                <div class="col-md-4">
-                    <%= f.label 'Customer' %>
-                    <%= f.text_field :customer %>
-                </div>
+                <%= f.label 'Job No.'%>
+                <%= f.text_field :job_number%>
+            </div>
+            <div class="row">
+                <%= f.label 'Name: ' %>
+                <%= f.text_field :name %>
+            </div>
+            <div class="row">
+                <%= f.label 'Customer: ' %>
+                <%= f.text_field :customer %>
             </div>
         </div>
-
+    <br>
         <% if !@jobsite.site_areas.nil? %>
             <div class='container-fluid'>
                 <div class="row">

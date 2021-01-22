@@ -2,10 +2,13 @@
     <button class="subheader_button"><%= link_to 'My Sites', jobsites_path %></button>
 </h2>
 
-<div id="jobsite_section">
-    <div id="jobsite_form">
-    <h2 id="form_header">Jobs<button id="form_header_btn"><%= link_to dash_button_label(@jobsite.jobs), jobsite_jobs_path(@jobsite) %></button></h2> 
-    <%= render partial: "jobsite_jobs", locals: {jobsite: @jobsite} %>
+<div class="container-fluid">
+    <div class="jobsite_form">
+    <h2 id="form_header"> <%= link_to'Jobs', jobsite_jobs_path(@jobsite) %></h2> 
+    
+    
+        <%= render_jobs_table(customers: false, areas: false) %>
+    <%# render partial: "jobsite_jobs", locals: {jobsite: @jobsite} %>
     </div>
     <%= render partial: "jobsite_employees", locals: {jobsite: @jobsite} %>
 

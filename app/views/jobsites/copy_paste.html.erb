@@ -4,15 +4,9 @@
 <table class="table table-condensed">
     <thead>
         <tr>
-            
             <th style="text-align: left;" >Job No.</th>
             <th style="text-align: left;" >Job Name</th>
             <th style="text-align: left;">Customer</th>
-
-                
-                <% @jobsite.site_areas.each  do unless |area| %>
-                    <th style="text-align: center;" ><%=area.code%></th>
-                <%end%>
         </tr>
     </thead>
     <tbody>
@@ -21,9 +15,6 @@
             <td style="text-align: left;" width=60px ><%=job.job_number%></td>
             <td style="text-align: left;" width=200px ><%=job.name%></td>
             <td style="text-align: left;" width=250px ><%=job.customer%></td>
-            <% @jobsite.site_areas.each do |area| %>
-                <td style="text-align: center;" width=20px ><%='X' if job.areas.include?(area)%></td>
-            <% end %>
         </tr>
     <% end %>
     </tbody>
