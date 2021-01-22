@@ -1,5 +1,6 @@
 class JobsController < ApplicationController
-
+    include ApplicationHelper
+    
     before_action :authentication_required
     before_action :set_variables
     before_action :user_jobsites
@@ -17,9 +18,26 @@ class JobsController < ApplicationController
     end
 
     def new_area
-        Area.find_or_create_by(area_params)
-        #render new_jobsite_job_path(@jobsite)
-        render :new
+       # binding.pry
+        add_to_jobs = params[:area][:jobs][:id].reject!{ |x| x == "on"}
+
+        if add_to_jobs.nil? 
+            flash[:alert] = 'You must select at least ONE job to apply the new code to.'
+            redirect_to jobsite_jobs_path(@jobsite)
+        end
+
+        area = Area.find_or_create_by(code: params[:area][:code], name:params[:area][:name])
+
+        add_to_jobs.collect do |j|
+            job = Job.find(j)
+            job.areas << area
+        end
+
+        if !area.save
+            area.errors.full_messages.map {|err| flash[:alert] = err} unless area.errors.nil?
+        end
+
+        render :index
     end
 
     def show
@@ -55,10 +73,7 @@ class JobsController < ApplicationController
 
     private
     def jobs_params
-        params.require(:job).permit(:id, :job_number, :name, :customer, :jobsite_id, areas_attributes:  [:code, :name])
-    end
-    def area_params
-        params.require(:area).permit(:code, :name)
+        params.require(:job).permit(:id, :job_number, :name, :customer, :jobsite_id, areas_attributes:  [:code, :name, :jobs])
     end
     def set_variables
         @jobsite = Jobsite.find(params[:jobsite_id])

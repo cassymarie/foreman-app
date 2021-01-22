@@ -1,50 +1,35 @@
 class EmployeesController < ApplicationController
+    include ApplicationHelper
     
-    get '/sitecrew/:id/new' do
-        redirect '/error' if !logged_in?
-        @jobsite = Jobsite.find(params[:id])
-        redirect '/jobsites' unless @jobsite.users.include?(current_user)
+    before_action :authentication_required
+    before_action :user_jobsites, except: [:index, :new]
+    before_action :set_variables
 
-        erb :'employees/new', :layout => :'layouts/layout_sitecrew'
+    def index
     end
 
-    get '/sitecrew/:id/edit/:employee_id' do
-        redirect '/error' if !logged_in?
-        @jobsite = Jobsite.find(params[:id])
-        redirect '/jobsites' unless @jobsite.users.include?(current_user)
-
-        @employee = Employee.find(params[:employee_id])
-        erb :'employees/edit', :layout => :'layouts/layout_sitecrew'
+    def new
     end
 
-    get '/sitecrew/:id/delete/:employee_id' do
-        redirect '/error' if !logged_in?
-        @jobsite = Jobsite.find(params[:id])
-        redirect '/jobsites' unless @jobsite.users.include?(current_user)
-
-        @employee = Employee.find(params[:employee_id])
-        erb :'employees/delete', :layout => :'layouts/layout_sitecrew'
+    def update
+        binding.pry
     end
 
-    post '/employee/new' do
-        employee = Employee.create(
-            :first_name => params[:employee][:first_name],
-            :last_name => params[:employee][:last_name],
-            :title_id => params[:title].to_i
-        )
-        jobsite = Jobsite.find(params[:jobsite][:id].to_i)
-        employee.jobsites << jobsite
-        employee.save
-        redirect "/jobsite/#{jobsite.id}/new"
+    def destroy
     end
 
-    patch '/employee/edit/:id' do
-        jobsite = params[:jobsite][:id]
-        employee = Employee.find(params[:id])
-        new_info = params[:employee]
-        new_info[:title_id] = new_info[:title_id].to_i
-        employee.update(new_info)
-        redirect "/sitecrew/#{jobsite}/new"
+   private
+    def employees_params
+        params.require(:employees).permit(:id, :first_name, :last_name, :title_id)
     end
-
+    def set_variables
+        @jobsite = Jobsite.find(params[:jobsite_id])
+        
+        if params[:action] != "index"
+            @employee = Employee.find_by(id: params[:id]) 
+        else
+            @employee =  @jobsite.employees.build
+        end
+        #binding.pry
+    end
 end

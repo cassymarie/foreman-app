@@ -4,20 +4,19 @@ class ApplicationController < ActionController::Base
     before_action :current_user
 
     def current_user
-        @current_user = User.find_by(id: session[:user_id])
-      end
-    
-      def logged_in?
-        session[:user_id]
-      end
-    
-      def authentication_required                             
-        redirect_to root_path unless logged_in?
-      end
+      @current_user = User.find_by(id: session[:user_id])
+    end
 
-      def user_jobsites
-        jobsite =  params[:controller] == 'jobsites' ? Jobsite.find(params[:id]) : Jobsite.find(params[:jobsite_id])
+    def logged_in?
+      session[:user_id]
+    end
+  
+    def authentication_required                             
+      redirect_to root_path unless logged_in?
+    end
 
-        redirect_to jobsites_path unless jobsite.users.include?(@current_user)
-      end
+    def user_jobsites
+      jobsite =  params[:controller] == 'jobsites' ? Jobsite.find(params[:id]) : Jobsite.find(params[:jobsite_id])
+      redirect_to jobsites_path unless jobsite.users.include?(@current_user)
+    end
 end

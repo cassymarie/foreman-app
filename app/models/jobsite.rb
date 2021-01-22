@@ -10,6 +10,9 @@ class Jobsite < ActiveRecord::Base
 
     has_many :jobsite_employees
     has_many :employees, through: :jobsite_employees
+    accepts_nested_attributes_for :employees
+    
+    scope :active, -> { where(jobsite_id: @jobsite.id )}
 
     after_create :create_reporting_tasks
 

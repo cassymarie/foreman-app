@@ -18,14 +18,14 @@ Rails.application.routes.draw do
   resources :jobsite, only: [:new, :edit, :create], controller: 'jobsites' do 
     resources :jobs, only: [:index, :create], shallow: true
     resources :job, only: [:new, :update, :edit], controller: 'jobs', shallow: true
+    resources :employees, only: [:index, :create, :update], shallow: true
+   # resources :employees, only: [:index, :new,:create, :update, :destroy]
+    resources :time_entry, only: [:index, :new], shallow: true
     resources :tasks, only: [:new, :create, :edit, :update, :destroy], shallow: true
     post '/new_job_area' => 'jobs#new_area'
   end
 
-  resources :sitecrew, only: [:new], controller: 'jobsites' do 
-    resources :employees, only: [:index, :new, :destroy], controller: 'sitecrews'
-    resources :time_entry, only: [:index, :new]
-  end
+
 
   # get '/new_job_area' => 'jobs#new_area'
   # post '/new_job_area' => 'jobs#create_area'

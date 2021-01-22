@@ -1,25 +1,44 @@
-<div class="jobsite_form">
-    <h2 id="form_header">
-        Site Crew
-        <button id="form_header_btn"><%= link_to dash_button_label(@jobsite.employees), new_sitecrew_employee_path(@jobsite) %></button>
-    </h2>
 
-    <% if @jobsite.employees.size > 0%>
-    <table class="table table-condensed">
-        <thead>
-            <tr>
-                <th style="text-align: left;" width=200px>Employee Name</th>
-                <th style="text-align: left;" padding-left=10px;>Title</th>
-            </tr>
-        </thead>
-        <tbody>
-            <%@jobsite.employees.sort_by{|e| e.last_name}.each do |employee|%>
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th style="text-align: left;" width=200px>Employee Name</th>
+            <th style="text-align: left;" padding-left=10px;>Title</th>
+            <% case view_by %>
+            <% when 'hours' %>
+                <th style="text-align: center;" width=80px>REG</th>
+                <th style="text-align: center;" width=80px>OT</th>
+                <th style="text-align: center;" width=80px>DT</th>
+                <th style="text-align: center;" width=80px>Total</th>
+            <% when 'jobs' %>
+                <% @jobsite.jobs.each do |job| %>
+                    <th style="text-align: center;" width=80px><%= job.job_number %></th>
+                <% end %>
+            <% else %>
+                <th style="text-align: center;" width=200px>You caught an Else Statement</th>
+            <% end %>
+        </tr>
+    </thead>
+    <tbody>
+    <%# binding.pry %>
+        <% @jobsite.employees.each do |employee| %>
             <tr>
                 <td style="text-align: left;" width=200px><%= employee.full_name %></td>
                 <td style="text-align: left;" padding-left=10px><%= employee.title %></td>
+                <% case view_by %>
+                <% when 'hours' %>
+                    <th style="text-align: center;" width=80px>0</th>
+                    <th style="text-align: center;" width=80px>-</th>
+                    <th style="text-align: center;" width=80px>-</th>
+                    <th style="text-align: center;" width=80px>0.00</th>
+                <% when 'jobs' %>
+                    <% @jobsite.jobs.each do |job| %>
+                        <th style="text-align: center;" width=80px>0</th>
+                    <% end %>
+                <% else %>
+                    <th style="text-align: center;" width=200px>You caught an Else Statement</th>
+                <% end %>
             </tr>
-            <%end%>
-        </tbody>
-    </table>
-    <%end%>
-</div>
+        <% end %>
+    </tbody>
+</table>
