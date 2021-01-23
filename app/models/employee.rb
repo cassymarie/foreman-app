@@ -4,6 +4,7 @@ class Employee < ActiveRecord::Base
     has_many :titles
 
     default_scope -> { order(last_name: :asc) }
+    scope :active, -> { where(active: true) }
 
     def full_name
         "#{self.last_name}, #{self.first_name}"

@@ -6,10 +6,10 @@
 
 html {
 	/* text-align: center; */
-	background-image: url(../images/benz.png);
+	/* background-image: url(benz.png); */
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 

@@ -2,4 +2,5 @@
     <h2 class="form_header">Add Employee </h2>
     <%= form_with model: @jobsite.employees.build, :url => jobsite_employees_path do |f| %>
         <%= f.label "New Employee" %>
+        <%= f.select :name, Employee.active.collect { |u| [ u.full_name ] }, include_blank: true %> 
     <% end %>

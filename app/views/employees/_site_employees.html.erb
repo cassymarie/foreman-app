@@ -2,7 +2,7 @@
 <table class="table table-condensed">
     <thead>
         <tr>
-            <% if editable %>
+            <% if !!editable %>
                 <th style="text-align: center;" width=20px></th>
             <% end %>
             <th style="text-align: left;" width=200px>Employee Name</th>
@@ -27,8 +27,8 @@
     <%# binding.pry %>
         <% @jobsite.employees.each do |employee| %>
             <tr>
-                <% if editable %>
-                    <th style="text-align: center;" width=20px></th>
+                <% if !!editable %>
+                    <td style="text-align: center;" width=20px><%= link_to "...", edit_employee_path(@jobsite, employee) %></td>
                 <% end %>
                 <td style="text-align: left;" width=200px><%= employee.full_name %></td>
                 <td style="text-align: left;" padding-left=10px><%= employee.title %></td>

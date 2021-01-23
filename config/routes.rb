@@ -18,19 +18,12 @@ Rails.application.routes.draw do
   resources :jobsite, only: [:new, :edit, :create], controller: 'jobsites' do 
     resources :jobs, only: [:index, :create], shallow: true
     resources :job, only: [:new, :update, :edit], controller: 'jobs', shallow: true
-    resources :employees, only: [:index, :create, :update], shallow: true
+    resources :employees, only: [:index, :edit, :create, :update], shallow: true
    # resources :employees, only: [:index, :new,:create, :update, :destroy]
-    resources :time_entry, only: [:index, :new], shallow: true
+    resources :time_entry, only: [:index, :new, :show], shallow: true
     resources :tasks, only: [:new, :create, :edit, :update, :destroy], shallow: true
     post '/new_job_area' => 'jobs#new_area'
+    get '/time_entry/by_day' => 'employees#by_day'
   end
 
-
-
-  # get '/new_job_area' => 'jobs#new_area'
-  # post '/new_job_area' => 'jobs#create_area'
-
-  # namespace :dashboard do
-  #   root to: "users#show"
-  # end
 end

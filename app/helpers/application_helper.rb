@@ -58,6 +58,9 @@ module ApplicationHelper
             title
     end
     
+    def current_jobsite
+        @jobsite = Jobsite.find_by(id: params[:id]) || Jobsite.find_by(id: params[:jobsite_id]) 
+    end
 
 end
 

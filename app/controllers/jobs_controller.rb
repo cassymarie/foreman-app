@@ -1,7 +1,9 @@
 class JobsController < ApplicationController
     include ApplicationHelper
+    include JobsitesHelper
     
     before_action :authentication_required
+    before_action :current_jobsite
     before_action :set_variables
     before_action :user_jobsites
 
@@ -18,7 +20,6 @@ class JobsController < ApplicationController
     end
 
     def new_area
-       # binding.pry
         add_to_jobs = params[:area][:jobs][:id].reject!{ |x| x == "on"}
 
         if add_to_jobs.nil? 
@@ -76,7 +77,6 @@ class JobsController < ApplicationController
         params.require(:job).permit(:id, :job_number, :name, :customer, :jobsite_id, areas_attributes:  [:code, :name, :jobs])
     end
     def set_variables
-        @jobsite = Jobsite.find(params[:jobsite_id])
         case params[:action]
         when "new"
             @job = Job.new

@@ -1,14 +1,17 @@
 class EmployeesController < ApplicationController
     include ApplicationHelper
-    
+    include JobsitesHelper
+
     before_action :authentication_required
     before_action :user_jobsites, except: [:index, :new]
+    before_action :current_jobsite
     before_action :set_variables
 
     def index
     end
 
-    def new
+    def edit
+        binding.pry
     end
 
     def update
@@ -23,7 +26,7 @@ class EmployeesController < ApplicationController
         params.require(:employees).permit(:id, :first_name, :last_name, :title_id)
     end
     def set_variables
-        @jobsite = Jobsite.find(params[:jobsite_id])
+        #@jobsite = Jobsite.find(params[:jobsite_id])
         
         if params[:action] != "index"
             @employee = Employee.find_by(id: params[:id]) 

@@ -8,7 +8,7 @@
         <div class="col-md-10">
             <div class="jobsite_form">
                 <h2 id="form_header"><%= @jobsite.name %></h2> 
-                <%= render partial: "jobsites/jobsite_employees", locals: {jobsite: @jobsite, view_by: 'jobs'} %>
+                <%= render partial: "site_employees", locals: {jobsite: @jobsite, view_by: 'jobs', editable: true} %>
             </div>
         </div>
     </div>
