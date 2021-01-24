@@ -13,6 +13,7 @@ class Jobsite < ActiveRecord::Base
     accepts_nested_attributes_for :employees
     
     scope :active, -> { where(jobsite_id: @jobsite.id )}
+    scope :current, -> { where(active: true )}
 
     after_create :create_reporting_tasks
 

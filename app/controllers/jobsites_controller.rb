@@ -6,7 +6,7 @@ class JobsitesController < ApplicationController
     before_action :current_jobsite
 
     def index
-       @jobsites = @current_user.jobsites
+       @jobsites = @current_user.admin == true ? Jobsite.all.current : @current_user.jobsites
        if @jobsites.size == 1
             redirect_to jobsite_path(@jobsites[0])
        end
