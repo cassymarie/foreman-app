@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :new, :create]
   get '/signin' => 'sessions#new'
   post '/signin' => 'sessions#create'
-  delete '/signout' => 'sessions#delete'
+  post '/signout' => 'sessions#destroy'
   
   #Google path
   get '/auth/google_oauth2/callback'=> 'sessions#omniauth'  
@@ -17,13 +17,21 @@ Rails.application.routes.draw do
   #Nested under jobsites
   resources :jobsite, only: [:new, :edit, :create], controller: 'jobsites' do 
     resources :jobs, only: [:index, :create], shallow: true
+    get 'jobs/by_hours' => 'jobs#by_hours'
+    get 'jobs/by_employees' => 'jobs#by_employees'
+    get 'jobs/by_areas' => 'jobs#by_areas'
     resources :job, only: [:new, :update, :edit], controller: 'jobs'
+    delete 'job/:id' => 'jobs#remove'
     resources :employees, only: [:index], shallow: true
+    get 'employees/by_hours' => 'employees#by_hours'
+    get 'employees/by_jobs' => 'employees#by_jobs'
     resources :jobsite_employees, only: [:new, :create, :destroy], as: 'employee', controller: 'jobsite_employees'
     resources :time_entry, only: [:index, :new, :show], shallow: true
-    resources :tasks, only: [:new, :create, :edit, :update, :destroy], shallow: true
+    #To be setup later
+    #resources :tasks, only: [:new, :create, :edit, :update, :destroy], shallow: true
     post '/new_job_area' => 'jobs#new_area'
     get '/time_entry/by_day' => 'employees#by_day'
+    
   end
 
 end

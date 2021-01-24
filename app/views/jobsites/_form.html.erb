@@ -1,27 +1,21 @@
-<div id="form">
-    <h2>Add Jobsite </h2>
-        <form action="/jobsite/new" method="POST">
-            <label>New site name: </label><input type="text" name="jobsite[name]" required>
-            <input type="submit" value="+">
-        </form>
-
-    t.string "city"
-    t.string "state"
-
-    <h2 id="form_header">Add Job </h2>
-    <%= form_with model: @jobsite, :url => new_jobsite_path do |f| %>
-        <%= f.hidden_field :jobsite_id, value: @jobsite_id%>
+<div>
+    <h2 id="form_header"><%=form_title%> Jobsite </h2>
+    <%= form_with model: form_job, url: form_link do |f| %>
+        <%= f.hidden_field :jobsite_id, value: @jobsite.id %>
         <div class='container-fluid'>
             <div class="row">
-                <%= f.label 'Name'%>
+                <%= f.label :name %>
                 <%= f.text_field :name%>
             </div>
             <div class="row">
-                <%= f.label 'Name: ' %>
-                <%= f.text_field :name %>
+                <%= f.label :city %>
+                <%= f.text_field :city %>
             </div>
             <div class="row">
-                <%= f.label 'Customer: ' %>
-                <%= f.text_field :customer %>
+                <%= f.label :state %>
+                <%= f.text_field :state %>
             </div>
         </div>
+        <%= f.submit %>
+    <% end %>
+</div>

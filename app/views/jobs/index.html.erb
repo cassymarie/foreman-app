@@ -1,23 +1,29 @@
-<h2 id="sub_header"> <%= link_to @jobsite.name, jobsite_path(@jobsite) %> </h2>
+<h2 id="sub_header"> <%= render "nav" %>  </h2>
 <div class="row">
     <div class="col-md-3">
+        <%# Add/Edit Job Form %>
         <div class="jobsite_form" >
-            <%= render "form" %> <%# Add/Edit Job Form %>
+            <%= render "form" %> 
         </div>
-
+        
+        <%# Add Job Area Form %>
         <div class="jobsite_form" >
-            <%= render "form_area" %> <%# Add/Edit Areas Form %>
+            <%= render "form_area" %> 
         </div>
     </div>
 
     <div class="col-md-9">
-    <div class="jobsite_form">
-        <h2 id="form_header">Jobs</h2> 
-            <div class="container-fluid">
-                <button class="btn btn-primary btn-sm"> Hours </button>
-                <button class="btn btn-primary btn-sm"> Employees </button>
+        <div class="jobsite_form">
+            <h2 id="form_header">Jobs</h2>
+            <div class='nav'>
+                <ul class="nav nav-tabs">
+                    <button class="btn btn-default"><li role="presentation" class="active"><%= link_to 'Info', jobsite_jobs_path(@jobsite.id)%></li></button>
+                    <button class="btn btn-default"><li role="presentation"><%= link_to 'Hours', jobsite_jobs_by_hours_path(@jobsite.id)%></li></button>
+                    <button class="btn btn-default"><li role="presentation"><%= link_to 'Employees', jobsite_jobs_by_employees_path(@jobsite.id)%></li></button>
+                    <button class="btn btn-default"><li role="presentation"><%= link_to 'Areas', jobsite_jobs_by_areas_path(@jobsite.id)%></li></button>
+                </ul>
             </div>
-        <%= render partial: "jobsites/collection_table", locals: {jobsite: @jobsite, collection: @jobsite.jobs, view_by: 'none', show: 'jobs', editable: true, customer: true, job_areas: true} %>
-    </div>
+            <%= render partial: "jobsites/collection_table", locals: {jobsite: @jobsite, collection: @jobsite.jobs, view_by: table_view_by, show: 'jobs', editable: edit_table, customer: show_customer, job_areas: show_areas} %>
+        </div>
     </div>
 </div>

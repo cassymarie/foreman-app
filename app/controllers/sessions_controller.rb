@@ -4,7 +4,6 @@ class SessionsController < ApplicationController
         redirect_to jobsites_path unless !logged_in?
         @user = User.new
     end
-
     #Google Omniauth Callback
     def omniauth
 
@@ -44,8 +43,7 @@ class SessionsController < ApplicationController
         end
     end
 
-    def delete
-       # binding.pry
+    def destroy
         session.delete :user_id
         redirect_to signin_path
     end

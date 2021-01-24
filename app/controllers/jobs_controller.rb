@@ -7,15 +7,22 @@ class JobsController < ApplicationController
     before_action :set_variables
     before_action :user_jobsites
 
-    # get '/abc-jobs' do
-    #     @jobs = Job.where(:customer => "ABC Company LLC")
-    #     erb :'jobs/customer'
-    # end
-
     def index
     end
 
     def new
+    end
+
+    def by_hours
+        render :index
+    end
+
+    def by_employees
+        render :index
+    end
+
+    def by_areas
+        render :index
     end
 
     def new_area

@@ -21,6 +21,15 @@ class EmployeesController < ApplicationController
     def destroy
     end
 
+    def by_hours
+        render :index
+    end
+
+    def by_jobs
+        render :index
+    end
+
+
    private
     def employees_params
         params.require(:employees).permit(:id, :first_name, :last_name, :title_id)

@@ -1,6 +1,6 @@
 
 <div>
-    <h2 id="form_header"><%=form_title%> </h2>
+    <h2 id="form_header"><%=form_title%> Job</h2>
     <%= form_with model: form_job, url: form_link do |f| %>
         <%= f.hidden_field :jobsite_id, value: @jobsite.id %>
         <div class='container-fluid'>
@@ -34,4 +34,5 @@
 
         <%= f.submit %>
     <% end %>
+    <%= form_delete_button %>
 </div>

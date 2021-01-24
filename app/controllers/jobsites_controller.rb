@@ -2,7 +2,6 @@ class JobsitesController < ApplicationController
     include ApplicationHelper
     
     before_action :authentication_required
-    #before_action :set_jobsite, only: [:show, :edit]
     before_action :user_jobsites, except: [:index, :new]
     before_action :current_jobsite
 
@@ -17,7 +16,7 @@ class JobsitesController < ApplicationController
         @jobsite = Jobsite.new
     end
     
-    def show        
+    def show
     end
 
     def edit
@@ -45,9 +44,5 @@ class JobsitesController < ApplicationController
     def jobsite_params
         params.require(:jobsite).permit(:id, :name, :city, :state)
     end
-
-    # def set_jobsite
-    #     @jobsite = Jobsite.find_by(id: params[:id])
-    # end
 
 end

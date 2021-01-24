@@ -4,12 +4,10 @@
         <thead>
             <% @jobsite.site_areas.size == 0 ? job_areas = false : job_areas %>
             <tr>
-                <% if !!editable %>
-                    <th style="text-align: center;" width=20px></th>
-                <% end %>
+                <th style="text-align: center;" width=20px></th>
 
                 <% if show == 'jobs' %>
-                    <th style="text-align: left;" width=30px>Job No.</th>
+                    <th style="text-align: left;" width=40px>Job#</th>
                     <th style="text-align: left;" width=200px;>Job Name</th>
                     <%= content_tag(:th, "Customer") unless !customer %>
                     <% if job_areas %>
@@ -23,19 +21,23 @@
                 <% end %>
 
                     <% case view_by %>
-                    <% when 'none' %>
-                    <% when 'hours','hour' %>
+                    <% when 'index','show' %>
+                    <% when 'by_hours' %>
                         <th style="text-align: center;" width=80px>REG</th>
                         <th style="text-align: center;" width=80px>OT</th>
                         <th style="text-align: center;" width=80px>DT</th>
                         <th style="text-align: center;" width=80px>Total</th>
-                    <% when 'jobs','job' %>
+                    <% when 'by_jobs' %>
                         <% @jobsite.jobs.each do |job| %>
                             <td style="text-align: center;" width=80px><%= job.job_number %></td>
                         <% end %>              
-                    <% when 'employees','employee','titles' %>
-                        <% Title.each do |t| %>
+                    <% when 'by_employees' %>
+                        <% Title.all.each do |t| %>
                             <th style="text-align: center;" width=80px><%= t.title %></th>
+                        <% end %>
+                    <% when 'by_areas' %> 
+                        <% @jobsite.site_areas.each do |a| %>
+                            <th style="text-align: center;" width=10px><%= a.code %></th>
                         <% end %>
                     <% else %>
                         <th style="text-align: center;" width=200px>Else Statement</th>
@@ -46,13 +48,12 @@
         <tbody>
             <% collection.active.each do |item| %>
                 <tr>
-                    <% if !!editable %>
-                        <td style="text-align: center;" width=20px>
-                            <%= edit_item_link(item, show) %></td>
-                    <% end %>
+                    <td style="text-align: center;" width=20px>
+                        <%= !!editable ? edit_item_link(item, show) : '' %>
+                    </td>
 
                     <% if show == 'jobs' %>
-                        <td style="text-align: left;" width=30px><%= item.job_number %></td>
+                        <td style="text-align: left;" width=40px><%= item.job_number %></td>
                         <td style="text-align: left;" width=200px;><%= item.name %></td>
                         <%= content_tag(:td, item.customer) unless !customer %>
                         <% if job_areas %>
@@ -66,18 +67,24 @@
                     <% end %>
 
                     <% case view_by %>
-                    <% when 'none' %>
-                    <% when 'hours' %>
+                    <% when 'index','show' %>
+                    <% when 'by_hours' %>
                         <td style="text-align: center;" width=80px>0</td>
                         <td style="text-align: center;" width=80px>-</td>
                         <td style="text-align: center;" width=80px>-</td>
                         <td style="text-align: center;" width=80px>0.00</td>
-                    <% when 'jobs' %>
+                    <% when 'by_jobs' %>
                         <% @jobsite.jobs.each do |job| %>
                             <td style="text-align: center;" width=80px>-</td>
                         <% end %>
-                    <% when 'areas' %>
-                    
+                    <% when 'by_employees' %>
+                        <% Title.all.each do |t| %>
+                            <td style="text-align: center;" width=80px>-</td>
+                        <% end %>
+                    <% when 'by_areas' %>
+                        <% @jobsite.site_areas.each do |a| %>
+                            <td style="text-align: center;" width=10px>-</td>
+                        <% end %>
                     <% else %>
                         <td style="text-align: center;" width=200px>Did NOT hit 'hours/jobs/areas'!</td>
                     <% end %>
@@ -86,7 +93,7 @@
             <% end %>
         </tbody>
 
-        <% if view_by != 'none' %>
+        <% if view_by != 'index' %>
             <tfoot>
                 
             </tfoot>

@@ -13,7 +13,6 @@ module ApplicationHelper
     def header_links
         a = params[:action]
         list = html_escape('')
-        params
         case params[:controller]
         when 'users','admin'
             if a == 'new'
@@ -26,13 +25,13 @@ module ApplicationHelper
         when 'admin'
             list << link_to('Admin(test)', dashboard_root_path)
         when 'jobsites','jobs','tasks','employees'
-            jobsite = params[:id] || params[:jobsite_id]
+            jobsite = params[:jobsite_id] || params[:id]
             
             if jobsite.nil?
                 list << link_to('Jobsites', jobsites_path) 
             else
                 list << link_to('Jobsites', jobsites_path)
-                jobsite = Jobsite.find_by(id: jobsite.to_i)
+                jobsite = Jobsite.find_by(id: jobsite)
                 list << content_tag(:strong, link_to(jobsite.name, jobsite_path(jobsite)))
                 list << link_to(' - Job Information', jobsite_jobs_path(jobsite))
                 list << link_to(' - Site Crew', jobsite_employees_path(jobsite))
@@ -41,7 +40,7 @@ module ApplicationHelper
         else
             list << link_to('Jobsites', jobsites_path)
         end
-        list << link_to('Log Out', signout_path, method: :delete)
+        list << button_to('Log Out', signout_path)
         list
     end
 

@@ -14,7 +14,6 @@ class JobsiteEmployeesController < ApplicationController
             @jobsite.employees << employee
         end
         redirect_to jobsite_employees_path(@jobsite)
-
     end
 
     def destroy

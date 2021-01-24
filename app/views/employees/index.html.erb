@@ -9,7 +9,17 @@
         <div class="col-md-9">
             <div class="jobsite_form">
                 <h2 id="form_header"><%= @jobsite.name %></h2> 
-                <%= render partial: "jobsites/jobsite_employees", locals: {jobsite: @jobsite, view_by: 'jobs', editable: true} %>
+                
+                <div class='nav'>
+                    <ul class="nav nav-tabs">
+                        <button class="btn btn-default"><li role="presentation" class="active"><%= link_to 'Info', jobsite_employees_path(@jobsite.id)%></li></button>
+                        <button class="btn btn-default"><li role="presentation"><%= link_to 'Hours', jobsite_employees_by_hours_path(@jobsite.id)%></li></button>
+                        <button class="btn btn-default"><li role="presentation"><%= link_to 'Jobs', jobsite_employees_by_jobs_path(@jobsite.id)%></li></button>
+                    </ul>
+                </div>
+
+                <%= render partial: "jobsites/collection_table", locals: {jobsite: @jobsite, collection: @jobsite.employees, view_by: table_view_by, show: 'employees', editable: edit_table, customer: false, job_areas: false} %>
+
             </div>
         </div>
     </div>
