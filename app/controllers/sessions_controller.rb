@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
 
     def new
+        redirect_to jobsites_path unless !logged_in?
         @user = User.new
     end
 

@@ -1,0 +1,98 @@
+<%# jobsite_employee_path(jobsite_id: @jobsite.id, id: employee.id), method: 'delete' %> 
+<% if collection.size > 0 %>
+    <table class="table table-condensed">
+        <thead>
+            <% @jobsite.site_areas.size == 0 ? job_areas = false : job_areas %>
+            <tr>
+                <% if !!editable %>
+                    <th style="text-align: center;" width=20px></th>
+                <% end %>
+
+                <% if show == 'jobs' %>
+                    <th style="text-align: left;" width=30px>Job No.</th>
+                    <th style="text-align: left;" width=200px;>Job Name</th>
+                    <%= content_tag(:th, "Customer") unless !customer %>
+                    <% if job_areas %>
+                        <% @jobsite.site_areas.each do |a| %>
+                            <th style="text-align: center;" width=10px><%= a.code %></th>
+                        <% end %>
+                    <% end %>
+                <% elsif show == 'employees'  %>
+                    <th style="text-align: left;" width=80px>Employee (Name)</th>
+                    <th style="text-align: left;" width=20px>Title</th>
+                <% end %>
+
+                    <% case view_by %>
+                    <% when 'none' %>
+                    <% when 'hours','hour' %>
+                        <th style="text-align: center;" width=80px>REG</th>
+                        <th style="text-align: center;" width=80px>OT</th>
+                        <th style="text-align: center;" width=80px>DT</th>
+                        <th style="text-align: center;" width=80px>Total</th>
+                    <% when 'jobs','job' %>
+                        <% @jobsite.jobs.each do |job| %>
+                            <td style="text-align: center;" width=80px><%= job.job_number %></td>
+                        <% end %>              
+                    <% when 'employees','employee','titles' %>
+                        <% Title.each do |t| %>
+                            <th style="text-align: center;" width=80px><%= t.title %></th>
+                        <% end %>
+                    <% else %>
+                        <th style="text-align: center;" width=200px>Else Statement</th>
+                    <% end %>
+                    <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% collection.active.each do |item| %>
+                <tr>
+                    <% if !!editable %>
+                        <td style="text-align: center;" width=20px>
+                            <%= edit_item_link(item, show) %></td>
+                    <% end %>
+
+                    <% if show == 'jobs' %>
+                        <td style="text-align: left;" width=30px><%= item.job_number %></td>
+                        <td style="text-align: left;" width=200px;><%= item.name %></td>
+                        <%= content_tag(:td, item.customer) unless !customer %>
+                        <% if job_areas %>
+                            <% @jobsite.site_areas.each do |a| %>
+                                <td style="text-align: center;" width=10px><%= item.areas.include?(a) ? 'X' : '' %></td>
+                            <% end %>
+                        <% end %>
+                    <% elsif show == 'employees'  %>
+                        <td style="text-align: left;" width=200px><%= item.full_name %></td>
+                        <td style="text-align: left;" padding-left=10px><%= item.title %></td>
+                    <% end %>
+
+                    <% case view_by %>
+                    <% when 'none' %>
+                    <% when 'hours' %>
+                        <td style="text-align: center;" width=80px>0</td>
+                        <td style="text-align: center;" width=80px>-</td>
+                        <td style="text-align: center;" width=80px>-</td>
+                        <td style="text-align: center;" width=80px>0.00</td>
+                    <% when 'jobs' %>
+                        <% @jobsite.jobs.each do |job| %>
+                            <td style="text-align: center;" width=80px>-</td>
+                        <% end %>
+                    <% when 'areas' %>
+                    
+                    <% else %>
+                        <td style="text-align: center;" width=200px>Did NOT hit 'hours/jobs/areas'!</td>
+                    <% end %>
+                    <td></td>
+                </tr>
+            <% end %>
+        </tbody>
+
+        <% if view_by != 'none' %>
+            <tfoot>
+                
+            </tfoot>
+        <% end %>
+
+    </table>
+<% end %>
+
+

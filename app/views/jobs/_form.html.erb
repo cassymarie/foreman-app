@@ -1,8 +1,8 @@
 
 <div>
-    <h2 id="form_header">Add Job </h2>
-    <%= form_with model: @jobsite.jobs.build, :url => jobsite_jobs_path do |f| %>
-        <%= f.hidden_field :jobsite_id, value: @jobsite_id%>
+    <h2 id="form_header"><%=form_title%> </h2>
+    <%= form_with model: form_job, url: form_link do |f| %>
+        <%= f.hidden_field :jobsite_id, value: @jobsite.id %>
         <div class='container-fluid'>
             <div class="row">
                 <%= f.label 'Job No.'%>
@@ -21,8 +21,9 @@
         <% if !@jobsite.site_areas.nil? %>
             <div class='container-fluid'>
                 <div class="row">
-                    <div>
-                        <strong>Jobsite Areas</strong>
+                    <div> 
+                        <hr>
+                        <strong><u>Select Job Areas</u></strong><br><br>
                         <%= f.fields_for :area do |a| %>
                             <%= a.collection_check_boxes :id, @jobsite.site_areas, :id, :code %>
                         <% end %>

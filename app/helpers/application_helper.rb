@@ -13,6 +13,7 @@ module ApplicationHelper
     def header_links
         a = params[:action]
         list = html_escape('')
+        params
         case params[:controller]
         when 'users','admin'
             if a == 'new'
@@ -59,7 +60,7 @@ module ApplicationHelper
     end
     
     def current_jobsite
-        @jobsite = Jobsite.find_by(id: params[:id]) || Jobsite.find_by(id: params[:jobsite_id]) 
+        @jobsite = Jobsite.find_by(id: params[:jobsite_id]) || Jobsite.find_by(id: params[:id])
     end
 
 end

@@ -16,4 +16,18 @@ module JobsHelper
         boxes << content_tag(:div, columns) unless num == 1 
         boxes
     end
+
+    def form_job
+        params[:action] == 'new' ? @jobsite.jobs.build : Job.find_by(id: params[:id])
+    end
+
+    def form_link
+        params[:action] == 'edit' ? jobsite_job_path(@jobsite.id, params[:id]) : jobsite_jobs_path(@jobsite.id)
+    end
+
+    def form_title
+        params[:action] == 'edit' ? 'Edit Job' : 'Add New Job'
+    end
+    
+
 end

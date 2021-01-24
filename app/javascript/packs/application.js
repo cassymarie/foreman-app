@@ -7,6 +7,13 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 
 import "channels"
+import '../css/application.css'
+
+const Choices = require('choices.js')
+
+document.addEventListener("turbolinks:load", function() {
+    var dropDownSelects = new Choices('#dropdown-choice-select')
+})
 
 Rails.start()
 Turbolinks.start()

@@ -6,6 +6,8 @@ class Job < ActiveRecord::Base
     has_many :areas, through: :job_areas
     accepts_nested_attributes_for :areas, reject_if: proc { |attributes| attributes['code'].blank? || attributes['name'].blank? }
 
+    scope :active, -> { where(active: true) }
+    
     belongs_to :jobsite
 
     after_create :create_reporting_area

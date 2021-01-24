@@ -2,6 +2,9 @@
 <table class="table table-condensed">
     <thead>
         <tr>
+            <% if !!editable %>
+                <th style="text-align: center;" width=20px></th>
+            <% end %>
             <th style="text-align: left;" width=200px>Employee Name</th>
             <th style="text-align: left;" padding-left=10px;>Title</th>
             <% case view_by %>
@@ -21,9 +24,12 @@
         </tr>
     </thead>
     <tbody>
-    <%# binding.pry %>
-        <% @jobsite.employees.each do |employee| %>
+        <% @jobsite.employees.active.each do |employee| %>
             <tr>
+                <% if !!editable && !employee.id.nil? %>
+                    <td style="text-align: center;" width=20px>
+                        <%= button_to "X", jobsite_employee_path(jobsite_id: @jobsite.id, id: employee.id), method: 'delete' %></td>
+                <% end %>
                 <td style="text-align: left;" width=200px><%= employee.full_name %></td>
                 <td style="text-align: left;" padding-left=10px><%= employee.title %></td>
                 <% case view_by %>
@@ -35,7 +41,7 @@
                     <td style="text-align: center;" width=80px>0.00</td>
                 <% when 'jobs' %>
                     <% @jobsite.jobs.each do |job| %>
-                        <td style="text-align: center;" width=80px>0</td>
+                        <td style="text-align: center;" width=80px>-</td>
                     <% end %>
                 <% else %>
                     <td style="text-align: center;" width=200px>Did NOT hit 'hour' or 'jobs'!</td>
@@ -45,8 +51,7 @@
     </tbody>
     <% if view_by != 'none' %>
         <tfoot>
-            <tr>
-            </tr>
+            
         </tfoot>
     <% end %>
 

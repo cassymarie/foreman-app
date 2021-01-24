@@ -17,9 +17,9 @@ Rails.application.routes.draw do
   #Nested under jobsites
   resources :jobsite, only: [:new, :edit, :create], controller: 'jobsites' do 
     resources :jobs, only: [:index, :create], shallow: true
-    resources :job, only: [:new, :update, :edit], controller: 'jobs', shallow: true
-    resources :employees, only: [:index, :edit, :create, :update], shallow: true
-   # resources :employees, only: [:index, :new,:create, :update, :destroy]
+    resources :job, only: [:new, :update, :edit], controller: 'jobs'
+    resources :employees, only: [:index], shallow: true
+    resources :jobsite_employees, only: [:new, :create, :destroy], as: 'employee', controller: 'jobsite_employees'
     resources :time_entry, only: [:index, :new, :show], shallow: true
     resources :tasks, only: [:new, :create, :edit, :update, :destroy], shallow: true
     post '/new_job_area' => 'jobs#new_area'

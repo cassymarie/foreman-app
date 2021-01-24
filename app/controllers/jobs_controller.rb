@@ -13,7 +13,6 @@ class JobsController < ApplicationController
     # end
 
     def index
-       
     end
 
     def new
@@ -45,7 +44,7 @@ class JobsController < ApplicationController
     end
  
     def edit
-        redirect_to new_jobsite_job unless @jobsite.jobs.size < 0 
+        render :index 
     end
 
     def create
@@ -67,6 +66,13 @@ class JobsController < ApplicationController
     end
 
     def update
+        @job.update(name: params[:job][:name], customer: params[:job][:customer])
+        add_areas = params[:job][:area][:id].reject! { |x| x.empty? }
+        add_areas.collect do |area|
+            a = Area.find(area)
+            @job.areas << a unless @job.areas.include?(a)
+        end
+        redirect_to jobsite_jobs_path(@jobsite)
     end
 
     def destroy
@@ -81,7 +87,7 @@ class JobsController < ApplicationController
         when "new"
             @job = Job.new
             @jobsite.jobs << @job
-        when "show","edit","new_area"
+        when "show","new_area", "update"
             @job = Job.find_by(id: params[:id])
         end
     end
