@@ -1,6 +1,6 @@
 <%# jobsite_employee_path(jobsite_id: @jobsite.id, id: employee.id), method: 'delete' %> 
 <% if collection.size > 0 %>
-    <table class="table table-condensed">
+    <table class="table table-hover">
         <thead>
             <% @jobsite.site_areas.size == 0 ? job_areas = false : job_areas %>
             <tr>
@@ -21,7 +21,7 @@
                 <% end %>
 
                     <% case view_by %>
-                    <% when 'index','show' %>
+                    <% when 'index','show','edit','destroy' %>
                     <% when 'by_hours' %>
                         <th style="text-align: center;" width=80px>REG</th>
                         <th style="text-align: center;" width=80px>OT</th>
@@ -67,7 +67,7 @@
                     <% end %>
 
                     <% case view_by %>
-                    <% when 'index','show' %>
+                    <% when 'index','show','edit' %>
                     <% when 'by_hours' %>
                         <td style="text-align: center;" width=80px>0</td>
                         <td style="text-align: center;" width=80px>-</td>
@@ -92,13 +92,6 @@
                 </tr>
             <% end %>
         </tbody>
-
-        <% if view_by != 'index' %>
-            <tfoot>
-                
-            </tfoot>
-        <% end %>
-
     </table>
 <% end %>
 

@@ -21,7 +21,8 @@ module JobsitesHelper
     end
 
     def edit_table
-        table_view_by == 'index' || table_view_by == 'show' ? true : false
+        allowed = ['index','show','edit','new_job_area']
+        allowed.include?(table_view_by) ? true : false
     end
 
     def form_title

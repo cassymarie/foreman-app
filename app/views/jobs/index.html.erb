@@ -1,4 +1,4 @@
-<h2 id="sub_header"> <%= render "nav" %>  </h2>
+<h2 id="sub_header"> <%= link_to @jobsite.name, jobsite_path(@jobsite) %>  </h2>
 <div class="row">
     <div class="col-md-3">
         <%# Add/Edit Job Form %>
@@ -20,7 +20,10 @@
                     <button class="btn btn-default"><li role="presentation" class="active"><%= link_to 'Info', jobsite_jobs_path(@jobsite.id)%></li></button>
                     <button class="btn btn-default"><li role="presentation"><%= link_to 'Hours', jobsite_jobs_by_hours_path(@jobsite.id)%></li></button>
                     <button class="btn btn-default"><li role="presentation"><%= link_to 'Employees', jobsite_jobs_by_employees_path(@jobsite.id)%></li></button>
-                    <button class="btn btn-default"><li role="presentation"><%= link_to 'Areas', jobsite_jobs_by_areas_path(@jobsite.id)%></li></button>
+
+                    <% if @jobsite.site_areas.size != 0 %>
+                        <button class="btn btn-default"><li role="presentation"><%= link_to 'Areas', jobsite_jobs_by_areas_path(@jobsite.id)%></li></button>
+                    <% end %>
                 </ul>
             </div>
             <%= render partial: "jobsites/collection_table", locals: {jobsite: @jobsite, collection: @jobsite.jobs, view_by: table_view_by, show: 'jobs', editable: edit_table, customer: show_customer, job_areas: show_areas} %>

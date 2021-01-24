@@ -1,6 +1,6 @@
 <h2 id="form_header" >Time Entry</h2>
 
-    <%= form_with url: jobsite_time_entry_by_day_path(@jobsite) do |f|  %>
+    <%= form_with url: jobsite_time_entries_path(@jobsite), method: 'get' do |f|  %>
         <%= f.label 'Select Day to View' %>
         <%= f.select :workday, Date::DAYNAMES.zip((0..6).to_a) %>
         <%= f.hidden_field :workday, id:"workday" %>

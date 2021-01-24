@@ -24,7 +24,7 @@ module ApplicationHelper
             return list << link_to('Sign Up', new_user_path)
         when 'admin'
             list << link_to('Admin(test)', dashboard_root_path)
-        when 'jobsites','jobs','tasks','employees'
+        when 'jobsites','jobs','tasks','employees','time_entries'
             jobsite = params[:jobsite_id] || params[:id]
             
             if jobsite.nil?
@@ -35,12 +35,12 @@ module ApplicationHelper
                 list << content_tag(:strong, link_to(jobsite.name, jobsite_path(jobsite)))
                 list << link_to(' - Job Information', jobsite_jobs_path(jobsite))
                 list << link_to(' - Site Crew', jobsite_employees_path(jobsite))
-                list << link_to(' - Time Enrty', jobsite_time_entry_index_path(jobsite))
+                list << link_to(' - Time Enrty', jobsite_time_entries_path(jobsite))
             end
         else
             list << link_to('Jobsites', jobsites_path)
         end
-        list << button_to('Log Out', signout_path)
+        list << content_tag(:a, button_to('Log Out', signout_path))
         list
     end
 

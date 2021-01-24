@@ -1,5 +1,5 @@
 module JobsHelper
-
+    
     def form_job
         params[:action] == 'new' ? @jobsite.jobs.build : Job.find_by(id: params[:id])
     end
@@ -11,16 +11,22 @@ module JobsHelper
     def form_delete_button
         return if params[:action] != 'edit'
 
-        button_to "Remove Job", jobsite_jobs_path(jobsite_id: params[:jobsite_id], id: params[:id]), method: 'delete'
+        button_to "Remove Job", jobsite_job_path(jobsite_id: params[:jobsite_id], id: params[:id]), method: 'delete'
+    end
+
+    def area_included?(area)
+        return false if params[:id].nil?
+        Job.find(params[:id]).areas.include?(area) ? true : false
     end
 
     def show_customer
-        table_view_by == 'index' ? true : false
+        allowed = ['index','show','edit','new_job_area']
+        allowed.include?(table_view_by) ? true : false
     end
     
     def show_areas
-        return false if table_view_by != 'index' && table_view_by != 'show'
-        @jobsite.site_areas.size > 0 ? true : false
+        allowed = ['index','show','edit','new_job_area','by_areas']
+        allowed.include?(table_view_by) && @jobsite.site_areas.size > 0 ? true : false
     end
     
     def jobs_checkbox_columns(j)

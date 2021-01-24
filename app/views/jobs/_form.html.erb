@@ -25,7 +25,9 @@
                         <hr>
                         <strong><u>Select Job Areas</u></strong><br><br>
                         <%= f.fields_for :area do |a| %>
-                            <%= a.collection_check_boxes :id, @jobsite.site_areas, :id, :code %>
+                            <%= a.collection_check_boxes :id, @jobsite.site_areas, :id, :code  do |b| %>
+                                <%= b.label(class: "check_box") { b.check_box(checked: area_included?(b.object), class: "add_margin") + b.text } %>
+                            <% end %>
                         <% end %>
                     </div>
                 </div>
