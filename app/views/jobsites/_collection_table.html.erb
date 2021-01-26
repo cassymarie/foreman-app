@@ -21,7 +21,7 @@
                 <% end %>
 
                     <% case view_by %>
-                    <% when 'index','show','edit','destroy' %>
+                    <% when 'index','show','edit','destroy','new_area','new_job_area' %>
                     <% when 'by_hours' %>
                         <th style="text-align: center;" width=80px>REG</th>
                         <th style="text-align: center;" width=80px>OT</th>
@@ -67,7 +67,7 @@
                     <% end %>
 
                     <% case view_by %>
-                    <% when 'index','show','edit' %>
+                    <% when 'index','show','edit','new_job_area','new_area' %>
                     <% when 'by_hours' %>
                         <td style="text-align: center;" width=80px>0</td>
                         <td style="text-align: center;" width=80px>-</td>

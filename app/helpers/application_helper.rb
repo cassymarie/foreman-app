@@ -40,7 +40,7 @@ module ApplicationHelper
         else
             list << link_to('Jobsites', jobsites_path)
         end
-        list << content_tag(:a, button_to('Log Out', signout_path))
+        list << content_tag(:a, button_to('Log Out', signout_path), class: "logout_button")
         list
     end
 
@@ -53,7 +53,7 @@ module ApplicationHelper
         when 'admin'
                 title << content_tag(:p, "(Admin) #{@current_user.first_name} #{@current_user.last_name[0].capitalize}")
         else
-                title << content_tag(:p, "(Foreman) #{@current_user.first_name} #{@current_user.last_name[0].capitalize}") 
+                title << content_tag(:p, "#{@current_user.first_name} #{@current_user.last_name[0].capitalize}") 
         end
             title
     end

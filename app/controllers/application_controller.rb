@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
     end
 
     def user_jobsites
+      return params[:action] == 'testing'
       jobsite =  params[:controller] == 'jobsites' ? Jobsite.find(params[:id]) : Jobsite.find(params[:jobsite_id])
       redirect_to jobsites_path unless jobsite.users.include?(@current_user) || @current_user.admin == true
     end

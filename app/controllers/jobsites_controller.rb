@@ -4,6 +4,7 @@ class JobsitesController < ApplicationController
     before_action :authentication_required
     before_action :user_jobsites, except: [:index, :new]
     before_action :current_jobsite
+    layout "dashboard", only: [:testing]
 
     def index
        @jobsites = @current_user.admin == true ? Jobsite.all.current : @current_user.jobsites
@@ -16,6 +17,9 @@ class JobsitesController < ApplicationController
         @jobsite = Jobsite.new
     end
     
+    def testing
+    end
+
     def show
     end
 

@@ -1,0 +1,76 @@
+body{
+  background-image: url(benz.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  font-family: 'Montserrat', sans-serif;
+}
+.center {
+  margin: auto;
+  width: 98%;
+}
+.horiz {
+  display:inline-flex;
+}
+.center {
+  margin: auto;
+  width: 99.9%;
+}
+.wrapper {
+  margin-top: 75px;
+}
+
+.jobsite-card {
+  background:rgb(225, 230, 236);
+  border: 1px solid rgba(0,0,0,.3);
+  box-shadow: 5px 5px 5px rgba(0,0,0,.3);
+  min-width: 150px;
+  max-width: 350px;
+  min-height: 225px;
+  max-height: fit-content;
+  padding: 15px;
+  margin: 10px;
+}
+
+.card-title {
+  font-size: 24px;
+  line-height: 30px;
+  text-align: left;
+  word-wrap: break-word;
+  padding-right: 5px;
+}
+
+
+.card-edit {
+  font-size: 12px;
+  text-align: right;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.card-address {
+  border-bottom: 2px solid #ccc;
+  font-size: 16px;
+  line-height: 20px;
+  padding: auto;
+  text-align: left;
+  font-style: italic;
+}
+
+.card-category { 
+  font-size: 20px;
+  line-height: 28px;
+  margin-top: 5px;
+  padding-left: 10px;
+  text-align: left;
+  font-weight: 500;
+}
+
+.card-subcategory {
+  font-size: 16px;
+  padding-left: 25px;
+  text-align: left;
+  padding-top: 3px;
+}

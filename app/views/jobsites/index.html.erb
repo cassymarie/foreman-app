@@ -1,18 +1,6 @@
 
-
-<div class="jobsite_form">
-    <h2 id="sub_header"> My Jobsites </h2>
-    <div class="row">
-        <% @jobsites.each do |jobsite|%>
-            <div class="col-xs-6 col-md-3 jobsite_card">
-                <h2><%= link_to jobsite.name, jobsite_path(jobsite)%>  <small><br><%= "  #{jobsite.city},  #{jobsite.state}"%></small></h2> 
-                <h5>Current Jobs: <%= link_to jobsite.jobs.size, jobsite_jobs_path(jobsite) %> <br>
-                <small> -- Total Areas: <%= jobsite.site_areas.size %> <br>
-                -- Total Tasks: <%= jobsite.tasks.size %> </small>
-                </h5>
-                
-                <h5>Sitecrew: <%= link_to jobsite.employees.size, jobsite_employees_path(jobsite) %> </h5>
-            </div>
-        <%end%>
+<div class="container-fluid">
+    <div class="row center">
+        <%= render "jobsite_card" %>
     </div>
 </div>

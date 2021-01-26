@@ -1,8 +1,17 @@
+<div class="dropdown" >
+    <button type="button" class="btn btn-default dropdown-toggle dropbtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Menu</span>
+    </button>
+    
+    <div class="dropdown-content" style="left:0;"> 
+        <%= header_links %>
+    </div>
+</div>
 
-      <div class="dropdown" width="150px" >
-        <button class="dropbtn">Menu</button>
-        <div class="dropdown-content" style="left:0;">
-          <%= header_links %>
-        </div>
-      </div>
-      <div class="pull-right"> <%= header_right %></div>
+
+<ol class="breadcrumb page_header "> 
+    <li>My Jobsites </li>
+</ol>
+
+<div class="header-name"><%= "#{@current_user.first_name} #{@current_user.last_name[0].capitalize}." %></div>
+
