@@ -11,7 +11,7 @@ module JobsHelper
     def form_delete_button
         return if params[:action] != 'edit'
 
-        button_to "Remove Job", jobsite_job_path(jobsite_id: params[:jobsite_id], id: params[:id]), method: 'delete'
+        button_to "Remove Job", jobsite_job_path(jobsite_id: params[:jobsite_id], id: params[:id]), method: 'delete',  :class => 'edit-btn delete'
     end
 
     def area_included?(area)
@@ -37,7 +37,7 @@ module JobsHelper
         j.collection_check_boxes(:id, @jobsite.jobs, :id, :job_number) do |job|
             columns << ( job.check_box + job.label ) unless job.object.id.nil?
             num += 1
-            if num == 6
+            if num == 8
                 boxes << content_tag(:div, columns)
                 columns = html_escape('')
                 num = 1

@@ -1,25 +1,18 @@
 
-<h2 id="sub_header"><%=@jobsite.name%>
-    <button class="subheader_button"><%= link_to 'My Sites', jobsites_path %></button>
-</h2>
-    <div class="row">
-        <div class="col-md-5 jobsite_form">   
-            <h2 id="form_header"> <%= link_to'Jobs', jobsite_jobs_path(@jobsite) %></h2> 
-            <%= render partial: "jobsites/collection_table", locals: {jobsite: @jobsite, collection: @jobsite.jobs, view_by: table_view_by, show: 'jobs', editable: false, customer: show_customer, job_areas: show_areas} %>
-
-
-            <%# render partial: "jobsites/collection_table", locals: {jobsite: @jobsite, collection: @jobsite.jobs, view_by: 'none', show: 'jobs', editable: false, customer: false, job_areas: true} %>
-        </div>
-
-        <div class="col-md-4 jobsite_form">
-            <h2 id="form_header"> <%= link_to'Employees', jobsite_employees_path(@jobsite) %></h2> 
-            <%= render partial: "jobsites/collection_table", locals: {jobsite: @jobsite, collection: @jobsite.employees, view_by: table_view_by, show: 'employees', editable: false, customer: show_customer, job_areas: show_areas} %>
-        </div>
-
-        <div class="col-md-2 jobsite_form">
-            <%= render "time_entries/day_select" %>
-        </div>
+    <div class="sect-bkgrnd">
+        <div class="sect-header"> Jobs
+            <button class="sect-btn"><%= link_to(content_tag(:span,'', class:"glyphicon glyphicon-chevron-down"),jobsite_jobs_path(@jobsite)) %></button>
+        </div> 
     </div>
 
-    
-    
+    <div class="sect-bkgrnd"> 
+        <div class="sect-header"> Employees
+            <button class="sect-btn"><span class="glyphicon glyphicon-chevron-down"></span></button>
+        </div> 
+    </div>
+
+    <div class="sect-bkgrnd"> 
+        <div class="sect-header"> Time Entry
+            <button class="sect-btn"><span class="glyphicon glyphicon-chevron-down"></span></button>
+        </div> 
+    </div>

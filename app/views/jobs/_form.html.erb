@@ -1,40 +1,32 @@
 
-<div>
-    <h2 id="form_header"><%=form_title%> Job</h2>
-    <%= form_with model: form_job, url: form_link do |f| %>
         <%= f.hidden_field :jobsite_id, value: @jobsite.id %>
-        <div class='container-fluid'>
-            <div class="row">
-                <%= f.label 'Job No.'%>
-                <%= f.text_field :job_number%>
+        <div class='container-fluid center'>
+            <div class="form-group col-xs-2">
+                <%= f.label 'Job No.', class: "form-label"%>
+                <%= f.text_field :job_number,  class: "form-control", placeholder: "0000" %>
             </div>
-            <div class="row">
-                <%= f.label 'Name: ' %>
-                <%= f.text_field :name %>
+            <div class="form-group col-xs-3">
+                <%= f.label 'Job Name', class: "form-label"%>
+                <%= f.text_field :name,  class: "form-control", placeholder: "Example Job" %>
             </div>
-            <div class="row">
-                <%= f.label 'Customer: ' %>
-                <%= f.text_field :customer %>
+            <div class="form-group col-xs-4">
+                <%= f.label 'Customer: ', class: "form-label" %>
+                <%= f.text_field :customer,  class: "form-control", placeholder: "ABC Company"  %>
             </div>
         </div>
-    <br>
         <% if !@jobsite.site_areas.nil? %>
-            <div class='container-fluid'>
-                <div class="row">
-                    <div> 
-                        <hr>
-                        <strong><u>Select Job Areas</u></strong><br><br>
-                        <%= f.fields_for :area do |a| %>
-                            <%= a.collection_check_boxes :id, @jobsite.site_areas, :id, :code  do |b| %>
-                                <%= b.label(class: "check_box") { b.check_box(checked: area_included?(b.object), class: "add_margin") + b.text } %>
-                            <% end %>
-                        <% end %>
-                    </div>
+            <div  class="container-fluid center">
+                <div class= "form-label"> Associated Areas </div>
+
+                <%= f.fields_for :area do |a| %>
+                <div class="form-checkbox"> 
+                    <%= a.collection_check_boxes :id, @jobsite.site_areas, :id, :code do |b| %> 
+                        <%= b.label { b.check_box(checked: area_included?(b.object)) + b.text } %>
+                    <% end%>
                 </div>
+                <% end %>
             </div>
         <% end %>
-
-        <%= f.submit %>
-    <% end %>
-    <%= form_delete_button %>
-</div>
+            
+        </div>
+        <%= f.submit :class => 'edit-btn' %> <%= form_delete_button %>

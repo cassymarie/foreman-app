@@ -1,4 +1,3 @@
-<%# jobsite_employee_path(jobsite_id: @jobsite.id, id: employee.id), method: 'delete' %> 
 <% if collection.size > 0 %>
     <table class="table table-hover">
         <thead>
@@ -9,10 +8,12 @@
                 <% if show == 'jobs' %>
                     <th style="text-align: left;" width=40px>Job#</th>
                     <th style="text-align: left;" width=200px;>Job Name</th>
-                    <%= content_tag(:th, "Customer") unless !customer %>
-                    <% if job_areas %>
+                    <%= content_tag(:th, "Customer") unless !customer && view_by != 'new' %>
+                    <% if job_areas || view_by == 'new' || view_by == 'new_job_area' %>
+                        <% if view_by != 'by_areas' %>
                         <% @jobsite.site_areas.each do |a| %>
-                            <th style="text-align: center;" width=10px><%= a.code %></th>
+                            <th style="text-align: center;" data-toggle="tooltip" data-placement="top" title=<%= a.name %> ><%= a.code %></th>
+                        <% end %>
                         <% end %>
                     <% end %>
                 <% elsif show == 'employees'  %>
@@ -21,19 +22,19 @@
                 <% end %>
 
                     <% case view_by %>
-                    <% when 'index','show','edit','destroy','new_area','new_job_area' %>
+                    <% when 'index','show','edit','new','job','destroy','new_area','new_job_area' %>
                     <% when 'by_hours' %>
-                        <th style="text-align: center;" width=80px>REG</th>
-                        <th style="text-align: center;" width=80px>OT</th>
-                        <th style="text-align: center;" width=80px>DT</th>
-                        <th style="text-align: center;" width=80px>Total</th>
+                        <th>REG</th>
+                        <th>OT</th>
+                        <th>DT</th>
+                        <th>Total</th>
                     <% when 'by_jobs' %>
                         <% @jobsite.jobs.each do |job| %>
-                            <td style="text-align: center;" width=80px><%= job.job_number %></td>
+                            <td><%= job.job_number %></td>
                         <% end %>              
                     <% when 'by_employees' %>
                         <% Title.all.each do |t| %>
-                            <th style="text-align: center;" width=80px><%= t.title %></th>
+                            <th data-toggle="tooltip" data-placement="top" title=<%= t.title %> ><%= t.title[0] %></th>
                         <% end %>
                     <% when 'by_areas' %> 
                         <% @jobsite.site_areas.each do |a| %>
@@ -55,10 +56,12 @@
                     <% if show == 'jobs' %>
                         <td style="text-align: left;" width=40px><%= item.job_number %></td>
                         <td style="text-align: left;" width=200px;><%= item.name %></td>
-                        <%= content_tag(:td, item.customer) unless !customer %>
-                        <% if job_areas %>
+                        <%= content_tag(:td, item.customer) unless !customer && view_by != 'new' %>
+                        <% if job_areas || view_by == 'new' || view_by == 'new_job_area' %>
+                            <% if view_by != 'by_areas' %>
                             <% @jobsite.site_areas.each do |a| %>
                                 <td style="text-align: center;" width=10px><%= item.areas.include?(a) ? 'X' : '' %></td>
+                            <% end %>
                             <% end %>
                         <% end %>
                     <% elsif show == 'employees'  %>
@@ -67,19 +70,19 @@
                     <% end %>
 
                     <% case view_by %>
-                    <% when 'index','show','edit','new_job_area','new_area' %>
+                    <% when 'index','show','edit','job','new_job_area','new_area','new' %>
                     <% when 'by_hours' %>
-                        <td style="text-align: center;" width=80px>0</td>
-                        <td style="text-align: center;" width=80px>-</td>
-                        <td style="text-align: center;" width=80px>-</td>
-                        <td style="text-align: center;" width=80px>0.00</td>
+                        <td>0</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>0.00</td>
                     <% when 'by_jobs' %>
                         <% @jobsite.jobs.each do |job| %>
-                            <td style="text-align: center;" width=80px>-</td>
+                            <td>-</td>
                         <% end %>
                     <% when 'by_employees' %>
                         <% Title.all.each do |t| %>
-                            <td style="text-align: center;" width=80px>-</td>
+                            <td>-</td>
                         <% end %>
                     <% when 'by_areas' %>
                         <% @jobsite.site_areas.each do |a| %>

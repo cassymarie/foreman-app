@@ -1,4 +1,16 @@
 
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Time Entry
+        <span class="caret"></span>
+        </button>
+            <ul class="dropdown-menu">
+                <% (1..7).map do |d| %>
+                    <li><%= link_to Date::DAYNAMES[d % 7], jobsite_time_entries_path(@jobsite) %></li>
+                <% end %>
+            </ul>
+    </div> 
+    
 <div id="display_list">
     <input type="hidden" value=<%= @sub_days.to_i %> name="weekday">
     <input type="hidden" id="day_index" value=<%=@sub_days.to_i%>>

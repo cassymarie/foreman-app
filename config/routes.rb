@@ -17,15 +17,14 @@ Rails.application.routes.draw do
   
   #Nested under jobsites
   resources :jobsite, only: [:new, :edit, :create], controller: 'jobsites' do 
-    get 'testing' => 'jobsites#testing'
-    resources :jobs, only: [:index, :create], shallow: true
+    resources :jobs, only: [:index]
     get 'jobs/by_hours' => 'jobs#by_hours'
     get 'jobs/by_employees' => 'jobs#by_employees'
     get 'jobs/by_areas' => 'jobs#by_areas'
-    get 'testing' => 'jobsites#testing'
 
-    resources :job, only: [:new, :update, :edit], controller: 'jobs'
-    post '/new_job_area' => 'jobs#new_area'
+    resources :job, only: [:new, :create, :update, :edit], controller: 'jobs'
+    get '/new_job_area' => 'jobs#new_area'
+    post '/new_job_area' => 'jobs#create_area'
     delete 'job/:id' => 'jobs#remove'
 
     resources :employees, only: [:index], shallow: true

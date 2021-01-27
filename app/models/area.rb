@@ -4,4 +4,6 @@ class Area < ActiveRecord::Base
     
     validates :code, presence: true
     validates :name, presence: true
+
+    scope :active, -> { where(active: true )}
 end

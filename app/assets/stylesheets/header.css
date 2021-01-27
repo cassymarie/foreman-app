@@ -32,9 +32,13 @@ header{
   color: white;
   width: inherit;
   height: fit-content;
-  font-size: 24px;
+  font-size: larger;
   padding: 5px;
   }
+
+.page_header a {
+  color: white;
+}
 
 .dropbtn {
   background-color: rgba(68, 68, 68,.40);
@@ -45,6 +49,7 @@ header{
   cursor: pointer;
   position: relative;
   display: inline-block;
+  height: inherit;
 }
 
 .dropdown-content {
@@ -65,6 +70,7 @@ header{
 
 .dropdown-content a:hover {background-color: #ddd;}
 .dropdown:hover .dropdown-content {display: block;}
+
 .dropdown:hover .dropbtn {
   background-color:rgb(68, 68, 68);
   color: white;

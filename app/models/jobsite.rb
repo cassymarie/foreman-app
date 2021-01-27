@@ -12,8 +12,9 @@ class Jobsite < ActiveRecord::Base
     has_many :employees, through: :jobsite_employees
     accepts_nested_attributes_for :employees
     
-    scope :active, -> { where(jobsite_id: @jobsite.id )}
-    scope :current, -> { where(active: true )}
+    scope :active, -> { where(active: true )}
+    scope :current, -> { where(jobsite_id: @jobsite.id )}
+    
 
     after_create :create_reporting_tasks
 
@@ -21,13 +22,13 @@ class Jobsite < ActiveRecord::Base
         areas=[]
         preset = Area.find(1)
         self.jobs.each do |job|
-            job.areas.each do |area|
+            job.areas.active.each do |area|
                 if !areas.include?(area) && area != preset
                     areas << area  
                 end
             end
         end
-        areas
+        areas.sort_by!{|a| a[:code]}
     end
 
     def create_reporting_tasks

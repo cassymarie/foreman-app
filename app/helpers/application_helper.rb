@@ -10,6 +10,23 @@ module ApplicationHelper
         end
     end
 
+    def page_title
+        case params[:controller]
+        when 'jobsites'
+            if params[:action] == "index"
+                'Jobsites' 
+            else
+                @jobsite.name
+            end
+        when 'sessions','users'
+            'Field Foreman App'
+        when 'jobsites','jobs','tasks','employees','time_entries'
+            @jobsite.name
+        else
+            'Field Foreman App'
+        end
+    end
+
     def header_links
         a = params[:action]
         list = html_escape('')
