@@ -1,6 +1,9 @@
 class Admin::EmployeesController < ApplicationController
     include JobsitesHelper
-    layout "admin"
+
+    layout "admin", only: [:index]
+    layout "admin_sections", only: [:new, :edit]
+    
     before_action :admin_required
     before_action :set_admin_variables
 

@@ -1,0 +1,35 @@
+<% if sect[:collection].size > 0 %>
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr class="tbl-header">
+                <th class="tbl-edit"></th>
+                <% sect[:stationary_headers].map do |hdr| %>
+                    <th class='tbl-lrg'><%= hdr %></th>
+                <% end %>
+                <th class="tbl-blank"></th>
+                <th class="tbl-edit"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <%# Data for the Table %>
+            <% sect[:collection].each do |item| %>
+                <tr>
+                    <td class="tbl-edit">
+                        <%= edit_admin_item_link(item) %>
+                    </td>
+
+                    <% sect[:stationary_info].map do |info| %>
+                        <td class="tbl-lrg"><%= admin_text(item, info) %></td>
+                    <% end %>
+                    <td class="tbl-blank"></td>
+                    <td class="tbl-edit">
+                        <%= delete_admin_item_link(item) %>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+<% end %>
+</div>
+

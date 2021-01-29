@@ -42,9 +42,10 @@ Rails.application.routes.draw do
 
   resources :admin, only: [:index]
   namespace :admin  do 
-    resources :jobsites, only: [:new, :create, :edit, :update]
+    resources :jobsites, only: [:new, :create, :index, :edit, :update]
     resources :employees, only: [:new, :create, :edit, :update, :index]
-    resources :users, only: [:index, :edit, :update, :destroy]
+    resources :users, only: [:index, :edit, :update]
+    resources :user_jobsites, only: [:create, :destroy], as: 'jobsite', controller: 'user_jobsites'
   end
 
 end

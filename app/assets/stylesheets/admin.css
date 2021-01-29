@@ -69,3 +69,16 @@ background-color:rgba(223, 189, 220, 0.5);
 .foreman {
     background-color:rgba(191, 144, 211, 0.5);
 }
+
+.form-sect {
+    display: grid;
+}
+
+
+.form-dbl {
+    display: flex;
+}
+
+.main {
+    width: 75%
+}

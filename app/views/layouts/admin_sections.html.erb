@@ -49,6 +49,9 @@
             <button class="sect-btn"><%= link_to(content_tag(:span,'', class:"glyphicon glyphicon-chevron-down"), admin_employees_path) %></button>
           </div>
           <%= yield %>
+          
+          <%= render partial: "admin/collection_admin_table",
+          locals: {sect: admin_control[current_admin_section.to_sym] } %>
         </div>
     </div>
    

@@ -1,0 +1,18 @@
+
+<div class="form-label">Jobsite Access</div>
+    <div class="well">
+        <% @jobsite.users.each do |user| %>
+            <div><%= user.full_name %> </div>
+        <% end %>
+    </div>
+    <div class='container-fluid'>
+        <%= form_with model: @jobsite.users.build, url: admin_jobsite_index_path do |f| %>
+        <%= f.hidden_field :jobsite_id, value: @jobsite.id %>
+            <%= f.select :id, User.all.collect { |u| [ u.full_name, u.id ] }, 
+                        input_html: {id: 'dropdown-choice-select'}, include_blank: true  %>
+            <%= button_tag(type: 'submit', class: "ok-btn", id: 'validForm') do %>
+                <span class="glyphicon glyphicon-ok"></span>
+            <% end %>
+        <% end %>
+    </div>
+</div>

@@ -1,23 +1,31 @@
 class Admin::JobsitesController < ApplicationController
     include JobsitesHelper
-    layout "admin"
+    layout "admin_sections"
     before_action :admin_required
-    before_action :set_admin_variables
+
+    def index
+        @jobsites = Jobsite.all.active
+    end
 
     def new
         @jobsite = Jobsite.new
     end
 
     def create
-        jobsite = Jobsite.create(jobsite_params)
-        jobsite.tasks << Task.new(:code => "299", :name => "General Labor")
-        jobsite.tasks << Task.new(:code => "275", :name => "Job Travel")
-        @current_user.jobsites << jobsite
-        redirect_to jobsites_path
+        @jobsite = Jobsite.create(jobsite_params)
+        @jobsite.tasks << Task.new(:code => "299", :name => "General Labor")
+        @jobsite.tasks << Task.new(:code => "275", :name => "Job Travel")
+        
+        render :edit
+    end
+
+    def edit
+        @jobsite = Jobsite.find_by(id: params[:id])
     end
 
     def update
-        @jobsite = Jobsite.find_by(id: param[:id])
+        binding.pry
+        @jobsite = Jobsite.find_by(id: params[:id])
         @jobsite.update(jobsite_params)
         redirect_to jobsites_path
     end
@@ -28,7 +36,7 @@ class Admin::JobsitesController < ApplicationController
 
    private
     def jobsite_params
-        params.require(:jobsite).permit(:id, :name, :city, :state)
+        params.require(:jobsite).permit(:id, :name, :city, :state, users_attributes: [:id])
     end
 
 end

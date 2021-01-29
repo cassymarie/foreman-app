@@ -13,6 +13,7 @@ class Jobsite < ActiveRecord::Base
     has_many :employees, through: :jobsite_employees
     accepts_nested_attributes_for :employees
     
+    default_scope -> { order(name: :asc) }
     scope :active, -> { where(active: true )}
     scope :current, -> { where(jobsite_id: @jobsite.id )}
 
@@ -29,6 +30,10 @@ class Jobsite < ActiveRecord::Base
             end
         end
         areas.sort_by!{|a| a[:code]}
+    end
+
+    def site_users
+        self.users.collect {|u| u.full_name}
     end
 
     def crew_size

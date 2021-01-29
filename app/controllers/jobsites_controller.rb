@@ -4,7 +4,7 @@ class JobsitesController < ApplicationController
     before_action :authentication_required
     before_action :user_jobsites, except: [:index, :new]
     before_action :current_jobsite
-    layout "application" , only: [:index]
+    layout "application", only: [:index]
     layout "jobsite", only: [:show]
 
     def index
