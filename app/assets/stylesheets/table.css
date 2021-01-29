@@ -1,0 +1,35 @@
+.tbl-edit {
+    width: fit-content;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.tbl-sml {
+    min-width: 30px;
+    width: fit-content;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    word-wrap: break-word;
+}
+
+
+.tbl-med {
+    min-width: 80px;
+    max-width: fit-content;
+    padding-right: 10px;
+    text-align: center;
+}
+
+.tbl-lrg {
+    min-width: 250px;
+    max-width: fit-content;
+    padding-right: 10px;
+    padding-left: 10px;
+    text-align: left;
+}
+
+.tbl-blank {
+    width: 100%;
+}

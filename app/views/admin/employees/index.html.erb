@@ -1,0 +1,10 @@
+    <div class="form-sub-header"><%= link_to('Add Employee', new_admin_employee_path) %>
+        <button class="close-btn">
+            <%= link_to(content_tag(:span,'', class:"glyphicon glyphicon-plus"), new_admin_employee_path) %>
+        </button>
+    </div>
+    <div class="form-sub-header"><%= link_to('Search Employee', admin_employees_search_path) %>
+        <button class="close-btn">
+            <%= link_to(content_tag(:span,'', class:"glyphicon glyphicon-plus"), admin_employees_search_path) %>
+        </button>
+    </div>

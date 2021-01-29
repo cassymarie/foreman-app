@@ -1,0 +1,14 @@
+<div>
+    <div class="form-header">New Employee
+        <button class="close-btn">
+            <%= link_to(content_tag(:span,'', class:"glyphicon glyphicon-remove"),admin_employees_path) %>
+        </button>
+    </div>
+        <div class="form-dbl">
+        <div class="form-sect main">
+            <%= form_with model: @employee, url: admin_employees_path do |f| %>
+                <%= render partial: 'form', locals: {f: f} %>
+            <% end %>
+        </div>
+    </div>
+</div>

@@ -1,19 +1,18 @@
-<div class="row">
-    <div class="jobsite_card col-md-6 col-md-offset-3" style="text-align:center;">  
-        <h1>Welcome to the Jobsite Log</h1>
-        <h2 style="text-align:center;">Signup</h2>
-                <%= form_with model: @user, html: {class: "text-center"} do |f| %>
-                        <%= f.text_field :first_name, placeholder: "First Name" %>
-                        <%= f.text_field :last_name, placeholder: "Last Name"  %>
-                        <p><%= f.check_box :admin %> Admin? </p>
+<div class="welcome-directions">Signup to Continue</div>
+<%= form_with model: @user, html: {class: "text-center"} do |f| %>
+    <div class="form-group login-form">
+        <%= f.text_field :first_name, placeholder: "First Name", class:"form-control login-input" %>
+        <%= f.text_field :last_name, placeholder: "Last Name", class:"form-control login-input"  %>
+        <div class="form-checkbox login-box"><%= f.check_box :admin %> Admin? </div>
 
-                        <%= f.email_field :email, placeholder: "Email" %>  <br>
-                        <%= f.password_field :password, placeholder: "Password" %> <br><br>
-                        <%= f.submit 'Sign Up' %>
-                <% end %>
-                <%= button_to "Sign Up with Google", "/auth/google_oauth2"%><br>
-                <%= link_to 'Log In Existing User', signin_path %><br>
-        <br>
-        
+        <%= f.email_field :email, placeholder: "Email", class:"form-control login-input" %>
+        <%= f.password_field :password, placeholder: "Password", class:"form-control login-input" %> 
+        <%= f.submit 'Sign Up', class:"btn-default login-btn" %>
     </div>
-</div>
+    <button class="omni-btn btn-default">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" class="google-icon">
+        <label class="google-text"> Login with Google </label>
+    </button>
+<% end %>
+<%= link_to 'Log In Existing User', signin_path, class: "ref-link" %>
+

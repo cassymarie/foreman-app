@@ -32,8 +32,9 @@ gem 'figaro'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 # Styling for SCSS views
-gem 'bootstrap', '~> 4.0'
 gem 'jquery-rails'
+gem 'bootstrap', '~> 4.0'
+
 
 
 group :development, :test do

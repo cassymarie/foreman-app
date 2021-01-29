@@ -13,17 +13,18 @@ Rails.application.routes.draw do
   #Google path
   get '/auth/google_oauth2/callback'=> 'sessions#omniauth'  
 
-  resources :jobsites, only: [:index, :show]
+  resources :jobsites, only: [:index]
   
   #Nested under jobsites
-  resources :jobsite, only: [:new, :edit, :create], controller: 'jobsites' do 
-    resources :jobs, only: [:index, :create], shallow: true
+  resources :jobsite, only: [:show], controller: 'jobsites' do 
+    resources :jobs, only: [:index]
     get 'jobs/by_hours' => 'jobs#by_hours'
     get 'jobs/by_employees' => 'jobs#by_employees'
     get 'jobs/by_areas' => 'jobs#by_areas'
 
-    resources :job, only: [:new, :update, :edit], controller: 'jobs'
-    post '/new_job_area' => 'jobs#new_area'
+    resources :job, only: [:new, :create, :update, :edit], controller: 'jobs'
+    get '/new_job_area' => 'jobs#new_area'
+    post '/new_job_area' => 'jobs#create_area'
     delete 'job/:id' => 'jobs#remove'
 
     resources :employees, only: [:index], shallow: true
@@ -33,9 +34,19 @@ Rails.application.routes.draw do
     resources :jobsite_employees, only: [:new, :create, :destroy], as: 'employee', controller: 'jobsite_employees'
 
     resources :time_entries, only: [:index], shallow: true
+    get 'time_entry/by_day' => 'time_entries#by_day'
 
     #To be setup later
     #resources :tasks, only: [:new, :create, :edit, :update, :destroy], shallow: true
+  end
+
+  resources :admin, only: [:index]
+  namespace :admin  do 
+    resources :jobsites, except: [:show]
+    get 'site_crews' => 'employees#site_crews'
+    resources :employees, except: [:show]
+    get 'employees/search' => 'employees#search'
+    resources :user_jobsites, only: [:create, :destroy], as: 'jobsite', controller: 'user_jobsites'
   end
 
 end

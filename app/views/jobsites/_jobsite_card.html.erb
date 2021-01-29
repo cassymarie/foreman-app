@@ -1,0 +1,28 @@
+<% @jobsites.active.each do |jobsite|%>
+<div class="jobsite-card col-xs-6 col-md-3 jobsite_id_<%=jobsite.id%>">
+
+    <div class="card-title jobsite-id_<%=jobsite.id%> horiz"> 
+            <%= link_to jobsite.name, jobsite_path(jobsite)%>
+    </div>
+
+    <div class="card-address jobsite-id_<%=jobsite.id%>">
+        <%= "#{jobsite.city},  #{jobsite.state}"%>
+    </div>
+
+    <div class="card-category jobsite-id_<%=jobsite.id%>">
+        Current Jobs: <%= link_to jobsite.jobs.size, jobsite_jobs_path(jobsite) %>
+    </div>
+
+    <div class="card-subcategory jobsite-id_<%=jobsite.id%>"> 
+        Total Areas: <%= jobsite.site_areas.size %>
+    </div> 
+
+    <div class="card-subcategory jobsite-id_<%=jobsite.id%>"> 
+        Total Tasks: <%= jobsite.tasks.size %>
+    </div>
+    
+    <div class="card-category jobsite-id_<%=jobsite.id%>">
+        Sitecrew: <%= link_to jobsite.employees.size, jobsite_employees_path(jobsite) %> 
+    </div>
+</div>
+<%end%>

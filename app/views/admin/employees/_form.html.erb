@@ -1,0 +1,21 @@
+
+    <div class='container-fluid form-sect'>
+        <div class="form-group">
+            <div class="form-group col-xs-3">
+                <%= f.label :first_name, class: "form-label" %>
+                <%= f.text_field :first_name,  class: "form-control", placeholder: "(eg. John)" %>
+            </div>
+            <div class="form-group col-xs-4">
+                <%= f.label :last_name, class: "form-label" %>
+                <%= f.text_field :last_name,  class: "form-control", placeholder: "(eg. Smith)" %>
+            </div>
+        </div>
+        <div class="form-group col-xs-7">
+            <%= f.fields_for :title_id do |e| %>
+                <%= e.select :id, Title.all.collect { |t| [ t.title, t.id ] }, 
+                    input_html: {id: 'dropdown-choice-select'}, include_blank: true %>
+            <% end %>
+        </div>
+        
+    </div>
+<%= f.submit :class => 'edit-btn' %>

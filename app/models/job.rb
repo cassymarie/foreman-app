@@ -4,8 +4,10 @@ class Job < ActiveRecord::Base
 
     has_many :job_areas
     has_many :areas, through: :job_areas
+    
     accepts_nested_attributes_for :areas, reject_if: proc { |attributes| attributes['code'].blank? || attributes['name'].blank? }
 
+    default_scope -> { order(job_number: :asc) }
     scope :active, -> { where(active: true) }
     
     belongs_to :jobsite

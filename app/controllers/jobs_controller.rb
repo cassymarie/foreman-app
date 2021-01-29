@@ -2,6 +2,7 @@ class JobsController < ApplicationController
     include ApplicationHelper
     include JobsitesHelper
     
+    layout "jobsite"
     before_action :authentication_required
     before_action :current_jobsite
     before_action :set_variables
@@ -10,6 +11,9 @@ class JobsController < ApplicationController
     def index
     end
 
+    def new
+    end
+    
     def by_hours
         render :index
     end
@@ -21,12 +25,15 @@ class JobsController < ApplicationController
     def by_areas
         render :index
     end
-
+    
     def new_area
+    end
+
+    def create_area
         add_to_jobs = params[:area][:jobs][:id]
 
         if add_to_jobs.nil? 
-            flash[:alert] = 'You must select at least ONE job to apply the new code to.'
+            flash[:notice] = 'You must select at least ONE job to apply the new code to.'
             redirect_to jobsite_jobs_path(@jobsite)
         end
 
@@ -34,18 +41,17 @@ class JobsController < ApplicationController
 
         add_to_jobs.each do |j|
             job = Job.find(j)
-            job.areas << area
+            job.areas << area unless job.areas.include?(area)
         end
 
         if !area.save
-            area.errors.full_messages.map {|err| flash[:alert] = err} unless area.errors.nil?
+            area.errors.full_messages.map {|err| flash[:notice] = err} unless area.errors.nil?
         end
 
         render :index
     end
 
     def edit
-        render :index 
     end
 
     def create
@@ -57,13 +63,14 @@ class JobsController < ApplicationController
 
         redirect_to jobsite_jobs_path(@jobsite) unless !@job.save
 
-        @job.errors.full_messages.map {|err| flash[:alert] = err} unless @job.errors.nil?
-        render :new
+        @job.errors.full_messages.map {|err| flash[:notice] = err} unless @job.errors.nil?
+        render :index
     end
 
     def update
         @job.update(name: params[:job][:name], customer: params[:job][:customer])
         add_areas = params[:job][:area][:id].reject! { |x| x.empty? }
+        JobArea.where(job_id: params[:id]).each {|x| x.delete unless add_areas.include?(x.id.to_s)}
         add_areas.collect do |area|
             a = Area.find(area)
             @job.areas << a unless @job.areas.include?(a)
@@ -78,6 +85,7 @@ class JobsController < ApplicationController
 
     private
     def jobs_params
+        binding.pry
         params.require(:job).permit(:id, :job_number, :name, :customer, :jobsite_id, areas_attributes:  [:code, :name, :jobs])
     end
 
@@ -85,7 +93,7 @@ class JobsController < ApplicationController
         case params[:action]
         when "new"
             @job = @jobsite.jobs.build
-        when "new_area", "update","remove"
+        when "new_area", "update","remove","edit"
             @job = Job.find_by(id: params[:id])
         end
     end

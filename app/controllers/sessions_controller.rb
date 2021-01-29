@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+    include ApplicationHelper
+    layout "login"
 
     def new
         redirect_to jobsites_path unless !logged_in?
@@ -6,7 +8,6 @@ class SessionsController < ApplicationController
     end
     #Google Omniauth Callback
     def omniauth
-
        user = User.find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |u|
             u.email = auth[:info][:email].downcase
             u.first_name = auth[:info][:first_name]

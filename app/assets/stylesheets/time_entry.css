@@ -1,5 +1,4 @@
-
-/* Time Entry - header day menu*/
+/* 
 #day_navbar {
     width: 100%;
     align-items: baseline;
@@ -21,15 +20,7 @@
     width: 30%;
 }
 
-/* #day_button_dash{
-    width: 12%;
-    margin: 5px;
-    margin-bottom: 10px;
-    padding: 5px;
 
-} */
-
-/* Time Entry - Form*/
 #form_time {
     background: rgb(247, 241, 241);
     border: 1px solid rgba(0,0,0,.3);
@@ -124,4 +115,4 @@
     color: white;
     font-weight: bold;
     background-color: darkred;
-}
+} */

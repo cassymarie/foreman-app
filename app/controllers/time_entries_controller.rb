@@ -2,10 +2,15 @@ class TimeEntriesController < ApplicationController
     include JobsitesHelper
     before_action :current_jobsite
     before_action :week_ending
+    layout "jobsite"
 
     def index
         @sub_days = params[:work_date].nil? ? Date.today.strftime("%w").to_i : params[:work_date].to_i
         @workdate = @week_ending - @sub_days.days
+    end
+
+    def by_day
+
     end
 
     private

@@ -1,98 +1,70 @@
-<%# jobsite_employee_path(jobsite_id: @jobsite.id, id: employee.id), method: 'delete' %> 
-<% if collection.size > 0 %>
+<% if sect[:collection].size > 0 %>
+<div class="table-responsive">
     <table class="table table-hover">
         <thead>
-            <% @jobsite.site_areas.size == 0 ? job_areas = false : job_areas %>
-            <tr>
-                <th style="text-align: center;" width=20px></th>
-
-                <% if show == 'jobs' %>
-                    <th style="text-align: left;" width=40px>Job#</th>
-                    <th style="text-align: left;" width=200px;>Job Name</th>
-                    <%= content_tag(:th, "Customer") unless !customer %>
-                    <% if job_areas %>
-                        <% @jobsite.site_areas.each do |a| %>
-                            <th style="text-align: center;" width=10px><%= a.code %></th>
-                        <% end %>
-                    <% end %>
-                <% elsif show == 'employees'  %>
-                    <th style="text-align: left;" width=80px>Employee (Name)</th>
-                    <th style="text-align: left;" width=20px>Title</th>
+            <tr class="tbl-header">
+                <th class="tbl-edit"></th>
+                <% sect[:stationary_headers].map do |hdr| %>
+                    <th class="<%= hdr == 'Job#' ? 'tbl-sml' : 'tbl-lrg' %> fixed"><%= hdr %></th>
                 <% end %>
 
-                    <% case view_by %>
-                    <% when 'index','show','edit','destroy' %>
-                    <% when 'by_hours' %>
-                        <th style="text-align: center;" width=80px>REG</th>
-                        <th style="text-align: center;" width=80px>OT</th>
-                        <th style="text-align: center;" width=80px>DT</th>
-                        <th style="text-align: center;" width=80px>Total</th>
-                    <% when 'by_jobs' %>
-                        <% @jobsite.jobs.each do |job| %>
-                            <td style="text-align: center;" width=80px><%= job.job_number %></td>
-                        <% end %>              
-                    <% when 'by_employees' %>
-                        <% Title.all.each do |t| %>
-                            <th style="text-align: center;" width=80px><%= t.title %></th>
-                        <% end %>
-                    <% when 'by_areas' %> 
-                        <% @jobsite.site_areas.each do |a| %>
-                            <th style="text-align: center;" width=10px><%= a.code %></th>
-                        <% end %>
-                    <% else %>
-                        <th style="text-align: center;" width=200px>Else Statement</th>
+                <% if !special_views.include?(view_by) %>
+                    <% sect[:index_headers].map do |hdr| %>
+                        <th  class="tbl-lrg"><%= hdr %></th>
                     <% end %>
-                    <th></th>
+
+                    <% if current_section == "Jobs" %>
+                        <% view_by_header[:by_areas].each do |code| %>
+                            <th class="tbl-sml scrollit"><%=code%></th>
+                        <% end %>
+                    <% end %>
+                <% else %>
+
+                    <% view_by_header[view_by.to_sym].map do |hdr| %>
+                            <th class="tbl-med scrollit"><%= hdr %></th>
+                    <% end %>
+
+                <% end %>
+                <th class="tbl-blank"></th>
             </tr>
         </thead>
         <tbody>
-            <% collection.active.each do |item| %>
+            <%# Data for the Table %>
+            <% sect[:collection].each do |item| %>
                 <tr>
-                    <td style="text-align: center;" width=20px>
-                        <%= !!editable ? edit_item_link(item, show) : '' %>
+                    <td class="tbl-edit">
+                        <%= edit_table ? edit_item_link(item) : '' %>
                     </td>
 
-                    <% if show == 'jobs' %>
-                        <td style="text-align: left;" width=40px><%= item.job_number %></td>
-                        <td style="text-align: left;" width=200px;><%= item.name %></td>
-                        <%= content_tag(:td, item.customer) unless !customer %>
-                        <% if job_areas %>
-                            <% @jobsite.site_areas.each do |a| %>
-                                <td style="text-align: center;" width=10px><%= item.areas.include?(a) ? 'X' : '' %></td>
-                            <% end %>
-                        <% end %>
-                    <% elsif show == 'employees'  %>
-                        <td style="text-align: left;" width=200px><%= item.full_name %></td>
-                        <td style="text-align: left;" padding-left=10px><%= item.title %></td>
+                    <% sect[:stationary_info].map do |info| %>
+                        <td class="<%= info == :job_number ? 'tbl-sml' : 'tbl-lrg' %> fixed"><%= current_section == "Employees" ? item.full_name : item[info] %></td>
                     <% end %>
 
-                    <% case view_by %>
-                    <% when 'index','show','edit' %>
-                    <% when 'by_hours' %>
-                        <td style="text-align: center;" width=80px>0</td>
-                        <td style="text-align: center;" width=80px>-</td>
-                        <td style="text-align: center;" width=80px>-</td>
-                        <td style="text-align: center;" width=80px>0.00</td>
-                    <% when 'by_jobs' %>
-                        <% @jobsite.jobs.each do |job| %>
-                            <td style="text-align: center;" width=80px>-</td>
+                    <% if !special_views.include?(view_by) %>
+
+                        <% sect[:index_info].map do |info| %>
+                            <td class="tbl-lrg"><%= current_section == "Employees" ? item.title : item[info] %></td>
                         <% end %>
-                    <% when 'by_employees' %>
-                        <% Title.all.each do |t| %>
-                            <td style="text-align: center;" width=80px>-</td>
+
+                        <% if current_section == "Jobs" %>
+                            <% view_by_header[:by_areas].each do |code| %>
+                                
+                                <td class="tbl-sml scrollit"><%= mark_area(item, code)%></td>
+                            <% end %>
                         <% end %>
-                    <% when 'by_areas' %>
-                        <% @jobsite.site_areas.each do |a| %>
-                            <td style="text-align: center;" width=10px>-</td>
-                        <% end %>
+                        
                     <% else %>
-                        <td style="text-align: center;" width=200px>Did NOT hit 'hours/jobs/areas'!</td>
+                        <% view_by_header[view_by.to_sym].map do |info| %>
+                            <td class="tbl-med scrollit">-</td>
+                        <% end %>
                     <% end %>
-                    <td></td>
+
+                    <td class="tbl-blank"></td>
                 </tr>
             <% end %>
         </tbody>
     </table>
 <% end %>
+</div>
 
 

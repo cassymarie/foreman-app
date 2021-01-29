@@ -1,24 +1,8 @@
-
+  
 <div id="display_list">
     <input type="hidden" value=<%= @sub_days.to_i %> name="weekday">
     <input type="hidden" id="day_index" value=<%=@sub_days.to_i%>>
-    
-    <nav id="day_navbar" style="display:inline-flex;">
-        <h2 id="page_title">Time Entry</h2>
-            <div id="day_class_reset">
-            <% count = 6 %> 
-            <% while count > -1 do %>
-                <button id="day_button <%= count %>" value=<%= count %> onclick="what_day_is_it(this)" 
-                <% if (count).to_i == @sub_days.to_i %>
-                    class='current_day'
-                 <% else %>
-                    class='another_day'
-                 <% end %>>
-                <%= (@week_ending - (count).days).to_date.strftime("%^A")[0..2] %></button>
-                <% count -= 1 %> 
-            <% end %>
-            </div>
-    </nav>
+
 
     <h1 style="color: red;"> More to come with javascript </h1>
 

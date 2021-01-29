@@ -1,8 +1,21 @@
+<div class="dropdown">
+    <button type="button" class="btn btn-default dropdown-toggle dropbtn" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Menu</span>
+    </button>
+  <ul class="dropdown-menu dropdown-content">
+    <li class="dropdown-item"><%= link_to "Jobsites", jobsites_path %></li>
+    <li class="dropdown-item"><%= link_to "Site Crews", admin_site_crews_path if @current_user.admin %></li>
+    <li class="dropdown-item"><%= link_to "Admin", admin_index_path if @current_user.admin %></li>
+    <li class="dropdown-item"><%= content_tag(:a, button_to('Log Out', signout_path), class: "logout_button dropdown-item") %></li>
+  </ul>
+</div>
 
-      <div class="dropdown" width="150px" >
-        <button class="dropbtn">Menu</button>
-        <div class="dropdown-content" style="left:0;">
-          <%= header_links %>
-        </div>
-      </div>
-      <div class="pull-right"> <%= header_right %></div>
+
+<div class="page_header"> 
+    <%= header_title %>
+</div>
+
+<% if @current_user %>
+<div class="header-name"><%= header_user %></div>
+<% end %>
+
