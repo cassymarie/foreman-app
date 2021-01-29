@@ -1,54 +1,5 @@
 module JobsitesHelper
 
-    def edit_item_link(item)
-        return unless control != 'jobsite'
-        case current_section
-        when 'Jobs'
-            link_to(content_tag(:span,'', class:"glyphicon glyphicon-pencil"),edit_jobsite_job_path(jobsite_id: @jobsite.id, id: item.id))
-        when 'Employees'
-            button_to jobsite_employee_path(jobsite_id: @jobsite.id, id: item.id), { method: :delete, remote: true, class: "remove-btn", controller: 'jobsite_employees' }  do 
-                content_tag(:span,'', class:"glyphicon glyphicon-remove")
-            end
-        end
-    end
-
-    def current_section_link(section)
-        return link_to(content_tag(:span,'', class:"glyphicon glyphicon-chevron-up"), jobsite_path(@jobsite)) if section == current_section
-        case section 
-        when 'Jobs'
-            link_to(content_tag(:span,'', class:"glyphicon glyphicon-chevron-down"), jobsite_jobs_path(@jobsite))
-        when 'Employees'
-            link_to(content_tag(:span,'', class:"glyphicon glyphicon-chevron-down"), jobsite_employees_path(@jobsite))
-        when 'Time Entry'
-            link_to(content_tag(:span,'', class:"glyphicon glyphicon-chevron-down"), jobsite_time_entries_path(@jobsite))
-        end
-    end
-
-    def has_areas?
-        @jobsite.site_areas.size > 0 ? true : false
-    end
-
-    def has_employees?
-        @jobsite.employees.active.size > 0 ? true : false
-    end
-
-    def active_button(btn_action)
-        return 'active' if control == 'jobsite_employees' && btn_action == 'index'
-        return 'active' if (view_by == 'new' || view_by == 'new_area' || view_by == 'edit') && btn_action == 'index'
-        params[:action] == btn_action ? 'active' : ''
-    end
-
-    def current_section
-        case control
-        when 'employees','jobsite_employees'
-            'Employees'
-        when 'jobs'
-            'Jobs'
-        when 'time_entries'
-            'Time_Entry'
-        end 
-    end
-
     def view_by
         params[:action]
     end
@@ -57,21 +8,8 @@ module JobsitesHelper
         params[:controller]
     end
 
-    def edit_table
-        special_views.include?(view_by) ? false : true
-    end
-
     def section_control
         {
-            :Employees => { 
-                :controllers => ['employees','jobsite_employees'],
-                :sub_nav => ['by_hours','by_jobs'],
-                :collection => @jobsite.employees.active,
-                :stationary_headers => ['Name'],
-                :stationary_info => ['full_name'],
-                :index_headers => ['Title'],
-                :index_info => [:title]
-            },
             :Jobs => {
                 :controllers => ['jobs'],
                 :sub_nav => ['by_hours','by_employees','by_areas'],
@@ -81,19 +19,32 @@ module JobsitesHelper
                 :index_headers => ['Customer'],
                 :index_info => [:customer]
             },
+            :Employees => { 
+                :controllers => ['employees','jobsite_employees'],
+                :sub_nav => ['by_hours','by_jobs'],
+                :collection => @jobsite.employees.active,
+                :stationary_headers => ['Name'],
+                :stationary_info => ['full_name'],
+                :index_headers => ['Title'],
+                :index_info => [:title]
+            },
             :Time_Entry => {
-                :controllers => ['time_entries'],
+                :controllers => ['time_entries','time_entry'],
                 :sub_nav => ['MON','TUE','WED','THUR','FRI','SAT','SUN'],
                 :stationary_headers => ['Name', 'Job','Task','Area','Reg','OT','DT'],
                 :stationary_info => [:full_name],
                 :index_headers => [],
                 :index_info => []
+            },
+            :Jobsites => {
+                :controllers => ['jobsites'],
+                :sub_nav => []
             }
         }
     end
 
     def available_sections
-        section_control.keys.collect{|k| k.to_s.tr("_"," ")}
+        section_control.keys.collect{|k| k.to_s}
     end
 
     def view_by_header
@@ -118,6 +69,55 @@ module JobsitesHelper
 
         header
     end
+
+    def current_section
+        section_control.map {|k,v| return k.to_s if v[:controllers].include?(control)} 
+    end
+
+    def current_section_link(section)
+        return link_to(content_tag(:span,'', class:"glyphicon glyphicon-chevron-up"), jobsite_path(@jobsite)) if section == current_section
+        case section 
+        when 'Jobs'
+            link_to(content_tag(:span,'', class:"glyphicon glyphicon-chevron-down"), jobsite_jobs_path(@jobsite))
+        when 'Employees'
+            link_to(content_tag(:span,'', class:"glyphicon glyphicon-chevron-down"), jobsite_employees_path(@jobsite))
+        when 'Time_Entry'
+            link_to(content_tag(:span,'', class:"glyphicon glyphicon-chevron-down"), jobsite_time_entries_path(@jobsite))
+        end
+    end
+
+    def edit_table
+        special_views.include?(view_by) ? false : true
+    end
+
+    def edit_item_link(item)
+        return unless control != 'jobsite'
+        case current_section
+        when 'Jobs'
+            link_to(content_tag(:span,'', class:"glyphicon glyphicon-pencil"),edit_jobsite_job_path(jobsite_id: @jobsite.id, id: item.id))
+        when 'Employees'
+            button_to jobsite_employee_path(jobsite_id: @jobsite.id, id: item.id), { method: :delete, remote: true, class: "remove-btn", controller: 'jobsite_employees' }  do 
+                content_tag(:span,'', class:"glyphicon glyphicon-remove")
+            end
+        end
+    end
+
+    def has_areas?
+        @jobsite.site_areas.size > 0 ? true : false
+    end
+
+    def has_employees?
+        @jobsite.employees.active.size > 0 ? true : false
+    end
+
+    def active_button(btn_action)
+        return 'active' if control == 'jobsite_employees' && btn_action == 'index'
+        return 'active' if (view_by == 'new' || view_by == 'new_area' || view_by == 'edit') && btn_action == 'index'
+        params[:action] == btn_action ? 'active' : ''
+    end
+
+
+
 
 
 end

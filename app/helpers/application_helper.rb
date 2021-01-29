@@ -1,61 +1,13 @@
 module ApplicationHelper
-    def page_title
-        case params[:controller]
-        when 'jobsites'
-            if params[:action] == "index"
-                'Jobsites' 
-            else
-                @jobsite.name
-            end
-        when 'sessions','users'
-            'Field Foreman App'
-        when 'jobsites','jobs','tasks','employees','time_entries'
-            @jobsite.name
-        else
-            'Field Foreman App'
-        end
+
+    def header_user
+        "#{@current_user.admin ? '(Admin) ' : ''}#{@current_user.first_name} #{@current_user.last_name[0].capitalize}."
     end
 
-    def header_links
-        a = params[:action]
-        list = html_escape('')
-        case params[:controller]
-        when 'admin'
-            list << link_to('Admin(test)', dashboard_root_path)
-        when 'jobsites','jobs','tasks','employees','time_entries'
-            jobsite = params[:jobsite_id] || params[:id]
-            
-            if jobsite.nil?
-                list << link_to('Jobsites', jobsites_path) 
-            else
-                list << link_to('Jobsites', jobsites_path)
-                jobsite = Jobsite.find_by(id: jobsite)
-                list << content_tag(:strong, link_to(jobsite.name, jobsite_path(jobsite)))
-                list << link_to(' - Job Information', jobsite_jobs_path(jobsite))
-                list << link_to(' - Site Crew', jobsite_employees_path(jobsite))
-                list << link_to(' - Time Enrty', jobsite_time_entries_path(jobsite))
-            end
-        else
-            list << link_to('Jobsites', jobsites_path)
-        end
-        list << content_tag(:a, button_to('Log Out', signout_path), class: "logout_button")
-        list
+    def current_date
+        Time.new.strftime("%A, %B %d") 
     end
 
-    def header_right
-        title = html_escape('')
-        case params[:controller]
-        when 'users','sessions'
-                params[:action] == 'show' ? title << content_tag(:p, "(Foreman) #{@current_user.first_name} #{@current_user.last_name[0].capitalize}") : ''
-                
-        when 'admin'
-                title << content_tag(:p, "(Admin) #{@current_user.first_name} #{@current_user.last_name[0].capitalize}")
-        else
-                title << content_tag(:p, "#{@current_user.first_name} #{@current_user.last_name[0].capitalize}") 
-        end
-            title
-    end
-    
     def current_jobsite
         @jobsite = Jobsite.find_by(id: params[:jobsite_id]) || Jobsite.find_by(id: params[:id])
     end

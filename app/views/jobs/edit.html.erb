@@ -2,8 +2,11 @@
     <div class="form-header">Edit Job
     <button class="close-btn"><%= link_to(content_tag(:span,'', class:"glyphicon glyphicon-remove"),jobsite_jobs_path(@jobsite)) %></button>
     </div>
-    <%= form_with model: @job, url: jobsite_job_path(@jobsite) do |f| %>
-        <%= render partial: 'form', locals: {jobsite: @jobsite, job: @job, f: f} %>
-    <% end %>
+    <div>
+            <%= form_with model: @job, url: jobsite_job_path(@jobsite) do |f| %>
+                <%= render partial: 'form', locals: {jobsite: @jobsite, job: @job, f: f} %>
+            <% end %>
+            <%= form_delete_button %>
+    </div>
 </div>
  

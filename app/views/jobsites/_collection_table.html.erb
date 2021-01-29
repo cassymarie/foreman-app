@@ -1,64 +1,70 @@
 <% if sect[:collection].size > 0 %>
+<div class="table-responsive">
     <table class="table table-hover">
         <thead>
             <tr class="tbl-header">
-                <th></th>
+                <th class="tbl-edit"></th>
                 <% sect[:stationary_headers].map do |hdr| %>
-                    <th><%= hdr %></th>
+                    <th class="<%= hdr == 'Job#' ? 'tbl-sml' : 'tbl-lrg' %> fixed"><%= hdr %></th>
                 <% end %>
 
                 <% if !special_views.include?(view_by) %>
                     <% sect[:index_headers].map do |hdr| %>
-                        <th><%= hdr %></th>
+                        <th  class="tbl-lrg"><%= hdr %></th>
                     <% end %>
 
                     <% if current_section == "Jobs" %>
                         <% view_by_header[:by_areas].each do |code| %>
-                            <th><%=code%></th>
+                            <th class="tbl-sml scrollit"><%=code%></th>
                         <% end %>
                     <% end %>
                 <% else %>
+
                     <% view_by_header[view_by.to_sym].map do |hdr| %>
-                            <td><%= hdr %></td>
+                            <th class="tbl-med scrollit"><%= hdr %></th>
                     <% end %>
+
                 <% end %>
+                <th class="tbl-blank"></th>
             </tr>
         </thead>
         <tbody>
             <%# Data for the Table %>
             <% sect[:collection].each do |item| %>
                 <tr>
-                    <td>
+                    <td class="tbl-edit">
                         <%= edit_table ? edit_item_link(item) : '' %>
                     </td>
 
                     <% sect[:stationary_info].map do |info| %>
-                        <td><%= current_section == "Employees" ? item.full_name : item[info] %></td>
+                        <td class="<%= info == :job_number ? 'tbl-sml' : 'tbl-lrg' %> fixed"><%= current_section == "Employees" ? item.full_name : item[info] %></td>
                     <% end %>
 
                     <% if !special_views.include?(view_by) %>
 
                         <% sect[:index_info].map do |info| %>
-                            <td><%= current_section == "Employees" ? item.title : item[info] %></td>
+                            <td class="tbl-lrg"><%= current_section == "Employees" ? item.title : item[info] %></td>
                         <% end %>
 
                         <% if current_section == "Jobs" %>
                             <% view_by_header[:by_areas].each do |code| %>
-                                <th><%= mark_area(item, code)%></th>
+                                
+                                <td class="tbl-sml scrollit"><%= mark_area(item, code)%></td>
                             <% end %>
                         <% end %>
                         
                     <% else %>
                         <% view_by_header[view_by.to_sym].map do |info| %>
-                            <td>-</td>
+                            <td class="tbl-med scrollit">-</td>
                         <% end %>
                     <% end %>
 
-                    <td></td>
+                    <td class="tbl-blank"></td>
                 </tr>
             <% end %>
         </tbody>
     </table>
 <% end %>
+</div>
 
 

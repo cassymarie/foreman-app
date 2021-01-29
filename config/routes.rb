@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   resources :jobsites, only: [:index]
   
   #Nested under jobsites
-  resources :jobsite, only: [:show, :new, :edit, :create], controller: 'jobsites' do 
+  resources :jobsite, only: [:show], controller: 'jobsites' do 
     resources :jobs, only: [:index]
     get 'jobs/by_hours' => 'jobs#by_hours'
     get 'jobs/by_employees' => 'jobs#by_employees'
@@ -34,9 +34,17 @@ Rails.application.routes.draw do
     resources :jobsite_employees, only: [:new, :create, :destroy], as: 'employee', controller: 'jobsite_employees'
 
     resources :time_entries, only: [:index], shallow: true
+    get 'time_entry/by_day' => 'time_entries#by_day'
 
     #To be setup later
     #resources :tasks, only: [:new, :create, :edit, :update, :destroy], shallow: true
+  end
+
+  resources :admin, only: [:index]
+  namespace :admin  do 
+    resources :jobsites, only: [:new, :create, :edit, :update]
+    resources :employees, only: [:new, :create, :edit, :update, :index]
+    resources :users, only: [:index, :edit, :update, :destroy]
   end
 
 end

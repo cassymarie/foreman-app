@@ -1,0 +1,71 @@
+.admin-site-card {
+    background:rgba(245, 245, 247, 0.982);
+    border: 1px solid rgba(0,0,0,.3);
+    box-shadow: 5px 5px 5px rgba(0,0,0,.3);
+    min-width: 250px;
+    width: fit-content;
+    height: 375px;
+    padding: 15px;
+    margin: 10px;
+    text-align: left;
+    word-wrap: normal;
+  }
+
+.admin-card-title {
+    font-size: 24px;
+    line-height: 30px;
+    word-wrap:normal;
+    padding-right: 5px;
+    margin-bottom: 10px;
+}
+
+  .admin-site-crew {
+    width: 100%;
+    height: initial;
+}
+
+.multi {
+    display: flex;
+}
+
+.admin-site-employee {
+    border: 1px solid rgba(0,0,0,.3);
+    box-shadow: 2px 2px 2px rgba(0,0,0,.3);
+    padding: 5px;
+    padding-left: 10px;
+    min-width: 200px;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 3px;
+    font-size: 14px;
+  }
+
+.admin-crew-col {
+    width: 50%;
+    margin-right: 5px;
+}
+
+.superintendent {
+    background-color:rgba(134, 222, 134, 0.5);
+}
+
+.apprentice {
+background-color:rgba(223, 189, 220, 0.5);
+}
+
+.classified {
+    background-color:rgba(223, 223, 189, 0.5);
+}
+
+.mechanic {
+    background-color:rgba(218, 187, 129, 0.5);
+}
+.helper {
+    background-color:rgba(218, 187, 129, 0.5);
+}
+.jouneyman {
+    background-color:rgba(129, 212, 218, 0.5);
+}
+.foreman {
+    background-color:rgba(191, 144, 211, 0.5);
+}

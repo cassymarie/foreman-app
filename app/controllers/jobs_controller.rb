@@ -41,7 +41,7 @@ class JobsController < ApplicationController
 
         add_to_jobs.each do |j|
             job = Job.find(j)
-            job.areas << area
+            job.areas << area unless job.areas.include?(area)
         end
 
         if !area.save
@@ -70,7 +70,6 @@ class JobsController < ApplicationController
     def update
         @job.update(name: params[:job][:name], customer: params[:job][:customer])
         add_areas = params[:job][:area][:id].reject! { |x| x.empty? }
-        #binding.pry
         JobArea.where(job_id: params[:id]).each {|x| x.delete unless add_areas.include?(x.id.to_s)}
         add_areas.collect do |area|
             a = Area.find(area)
@@ -86,6 +85,7 @@ class JobsController < ApplicationController
 
     private
     def jobs_params
+        binding.pry
         params.require(:job).permit(:id, :job_number, :name, :customer, :jobsite_id, areas_attributes:  [:code, :name, :jobs])
     end
 

@@ -11,8 +11,7 @@ module JobsHelper
     
     def form_delete_button
         return if params[:action] != 'edit'
-
-        button_to "Remove Job", jobsite_job_path(jobsite_id: params[:jobsite_id], id: params[:id]), method: 'delete',  :class => 'edit-btn delete'
+         button_to "Remove Job", jobsite_job_path(jobsite_id: params[:jobsite_id], id: params[:id]), method: 'delete',  :class => 'edit-btn delete'
     end
     
     def area_included?(area)
@@ -30,7 +29,7 @@ module JobsHelper
 
     def mark_area(item, code)
         item.areas.each do |a|
-           return "X" if code == a.code
+           return "X" if code.upcase == a.code.upcase
         end
         ""
     end

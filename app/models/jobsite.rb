@@ -1,6 +1,7 @@
 class Jobsite < ActiveRecord::Base
     has_many :user_jobsites
     has_many :users, through: :user_jobsites
+    accepts_nested_attributes_for :users
 
     has_many :jobs
     accepts_nested_attributes_for :jobs
@@ -14,7 +15,6 @@ class Jobsite < ActiveRecord::Base
     
     scope :active, -> { where(active: true )}
     scope :current, -> { where(jobsite_id: @jobsite.id )}
-    
 
     after_create :create_reporting_tasks
 
@@ -29,6 +29,20 @@ class Jobsite < ActiveRecord::Base
             end
         end
         areas.sort_by!{|a| a[:code]}
+    end
+
+    def crew_size
+        self.employees.size
+    end
+
+    def self.large_to_small
+        sites = []
+        ordered = []
+        self.all.active.each do |site|
+            sites << [site, site.crew_size]
+        end
+        sites = sites.sort_by{|s| s[1]}.reverse!.map{|s|ordered<<s[0]}
+        ordered
     end
 
     def create_reporting_tasks

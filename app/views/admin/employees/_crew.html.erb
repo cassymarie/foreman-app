@@ -1,0 +1,20 @@
+<% count = jobsite.employees.size <= 10 ? 0 : 1  %>
+    <% jobsite.employees.each do |e| %>
+        <% if count == 1 %>
+            <div class="admin-crew-col">
+        <% end %>
+
+            <div id="employee_<%=e.id%>" class="admin-site-employee <%= e.title.downcase %>">
+                <%= e.full_name %> (<%= e.title[0] %>) 
+            </div>
+
+            <% count += 1 unless count == 0 %>
+
+        <% if count == 11 %>
+            <% count = 1 %>
+            </div>
+        <% end %>
+    <% end %>
+        <% if count > 1 %>
+            </div>
+        <% end %>

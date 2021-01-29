@@ -16,7 +16,7 @@ body{
 }
 
 .wrapper {
-  margin-top: 75px;
+  margin-top: 70px;
 }
 
 .tbl-header {
@@ -25,14 +25,22 @@ body{
   border-bottom: 2px double rgba(65, 64, 64, 0.3);
 }
 
+
 .active {
   font-weight: 600;
 }
 
 .jobsite-name {
-  font-size: 24px;
+  font-size: 36px;
+  font-weight: 600;
   text-align: left;
   margin-bottom: 10px;
+}
+.page-date {
+  float: right;
+  font-size: 20px;
+  font-weight: 300;
+  margin-top: 15px;
 }
 
 .jobsite-card {
@@ -103,7 +111,7 @@ body{
   background:rgba(179, 179, 179, 0.3);
   border-bottom: 1px solid rgba(0,0,0,.3);
   padding: 5px 2px 5px 10px;
-  font-size: large;
+  font-size: 24px;
 }
 
 .sect-btn {
@@ -120,6 +128,10 @@ body{
   margin: 10px;
 }
 
+.sub-btn {
+  margin-bottom: 4px;
+}
+
 .ok-btn {
   margin-bottom: 10px;
   color: darkgreen;
@@ -132,7 +144,17 @@ body{
 }
 
 .delete {
-  float: right;
+  color: darkred;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  height: fit-content;
+}
+
+.delete_jobs {
+  vertical-align: bottom;
 }
 
 

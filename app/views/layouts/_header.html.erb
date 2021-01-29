@@ -4,7 +4,7 @@
     </button>
   <ul class="dropdown-menu dropdown-content">
     <li class="dropdown-item"><%= link_to "Jobsites", jobsites_path %></li>
-    <li class="dropdown-item"><a href="#">Admin</a></li>
+    <li class="dropdown-item"><%= link_to "Admin", admin_employees_path if @current_user.admin %></li>
     <li class="dropdown-item"><%= content_tag(:a, button_to('Log Out', signout_path), class: "logout_button dropdown-item") %></li>
   </ul>
 </div>
@@ -15,6 +15,6 @@
 </div>
 
 <% if @current_user %>
-<div class="header-name"><%= "#{@current_user.first_name} #{@current_user.last_name[0].capitalize}." %></div>
+<div class="header-name"><%= header_user %></div>
 <% end %>
 
