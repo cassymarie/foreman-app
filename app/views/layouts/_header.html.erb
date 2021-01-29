@@ -4,14 +4,15 @@
     </button>
   <ul class="dropdown-menu dropdown-content">
     <li class="dropdown-item"><%= link_to "Jobsites", jobsites_path %></li>
-    <li class="dropdown-item"><%= link_to "Admin", admin_employees_path if @current_user.admin %></li>
+    <li class="dropdown-item"><%= link_to "Site Crews", admin_site_crews_path if @current_user.admin %></li>
+    <li class="dropdown-item"><%= link_to "Admin", admin_index_path if @current_user.admin %></li>
     <li class="dropdown-item"><%= content_tag(:a, button_to('Log Out', signout_path), class: "logout_button dropdown-item") %></li>
   </ul>
 </div>
 
 
 <div class="page_header"> 
-    Field Jobsite App
+    <%= header_title %>
 </div>
 
 <% if @current_user %>

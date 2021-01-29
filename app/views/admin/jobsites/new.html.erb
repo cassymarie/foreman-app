@@ -4,11 +4,14 @@
             <%= link_to(content_tag(:span,'', class:"glyphicon glyphicon-remove"),admin_employees_path) %>
         </button>
     </div>
-
-    <div class="form-sect">
-        <%= form_with model: @jobsite, url: admin_jobsites_path do |f| %>
-            <%= render partial: 'form', locals: {jobsite: @jobsite, f: f} %>
-        <% end %>
+        <div class="form-dbl">
+        <div class="form-sect main">
+            <%= form_with model: @jobsite, url: admin_jobsites_path do |f| %>
+                <%= render partial: 'form', locals: {jobsite: @jobsite, f: f} %>
+            <% end %>
+        </div>
+        <div class="form-sect side">
+            <div class="info-text"> Add Jobsite to be able to set User Access </div>
+        </div>
     </div>
-
 </div>

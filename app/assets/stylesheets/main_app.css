@@ -175,6 +175,16 @@ body{
   margin-bottom: 10px;
 }
 
+.form-sub-header {
+  border-top: 1px solid rgba(179, 179, 179, 0.3);
+  border-bottom: 2px double rgba(65, 64, 64, 0.3);
+  background:rgb(203, 229, 245);
+  padding: 10px;
+  font-size: large;
+  font-weight: 600;
+  margin-bottom: 0px;
+}
+
 .trans-sm {
   background: transparent;
   margin-bottom: 5px;

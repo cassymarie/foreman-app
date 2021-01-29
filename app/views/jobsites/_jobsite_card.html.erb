@@ -3,9 +3,6 @@
 
     <div class="card-title jobsite-id_<%=jobsite.id%> horiz"> 
             <%= link_to jobsite.name, jobsite_path(jobsite)%>
-        <div class="card-edit jobsite-id_<%=jobsite.id%>"> 
-            <%= link_to content_tag(:span,'', class: "glyphicon glyphicon-pencil"), jobsite_jobs_path(jobsite) %>
-        </div>
     </div>
 
     <div class="card-address jobsite-id_<%=jobsite.id%>">

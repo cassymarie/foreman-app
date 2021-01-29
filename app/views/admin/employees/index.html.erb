@@ -1,14 +1,10 @@
-<% @jobsites.each do |jobsite|%>
-    <div class="container-fluid admin-site-card col-xs-6 col-md-4 col-md-8 jobsite_id_<%=jobsite.id%>">
-        <div class="admin-card-title jobsite-id_<%=jobsite.id%>"> 
-            <%= link_to jobsite.name, jobsite_path(jobsite)%>
-            <div class="card-edit jobsite-id_<%=jobsite.id%>"> 
-                <%= link_to content_tag(:span,'', class: "glyphicon glyphicon-pencil"), jobsite_jobs_path(jobsite) %>
-            </div>
-        </div>
-        <% show = jobsite.crew_size > 10 ? 'multi' : '' %>
-        <div class="admin-site-crew <%= show %>">
-            <%= render partial: "crew",locals: {jobsite: jobsite } %>
-        </div>
+    <div class="form-sub-header"><%= link_to('Add Employee', new_admin_employee_path) %>
+        <button class="close-btn">
+            <%= link_to(content_tag(:span,'', class:"glyphicon glyphicon-plus"), new_admin_employee_path) %>
+        </button>
     </div>
-<%end%>
+    <div class="form-sub-header"><%= link_to('Search Employee', admin_employees_search_path) %>
+        <button class="close-btn">
+            <%= link_to(content_tag(:span,'', class:"glyphicon glyphicon-plus"), admin_employees_search_path) %>
+        </button>
+    </div>

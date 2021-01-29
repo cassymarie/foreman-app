@@ -1,7 +1,6 @@
-<div>
     <div class="form-header">Setup Jobsite
         <button class="close-btn">
-            <%= link_to(content_tag(:span,'', class:"glyphicon glyphicon-remove"),admin_employees_path) %>
+            <%= link_to(content_tag(:span,'', class:"glyphicon glyphicon-remove"), admin_jobsites_path) %>
         </button>
     </div>
     <div class="form-dbl">
@@ -14,4 +13,3 @@
             <%= render partial: 'admin/user_jobsites/form', locals: {jobsite: @jobsite} %>
         </div>
     </div>
-</div>

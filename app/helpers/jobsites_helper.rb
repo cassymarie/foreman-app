@@ -1,13 +1,5 @@
 module JobsitesHelper
 
-    def view_by
-        params[:action]
-    end
-
-    def control
-        params[:controller]
-    end
-
     def section_control
         {
             :Jobs => {

@@ -32,29 +32,34 @@
     
     <div class="container-fluid wrapper">
       <%= render partial: "layouts/flash"%>
-        <div  class="btn-group" role="group" aria-label="Button group with nested dropdown">
-          <div class="btn-group" role="group">
-            <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Jobsites <span class="glyphicon glyphicon-chevron-down"></span>
-            </button>
-            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-              <%= link_to 'New Jobsite', new_admin_jobsite_path, class: 'dropdown-item' %>
-              <a class="dropdown-item" href="#">Dropdown link</a>
-            </div>
-          </div>
-        </div>
- 
+
+        <% if current_admin_section != 'admin'%>
         <div class="sect-bkgrnd">
-          <div class="sect-header"> Jobsites
-            <button class="sect-btn"><%= link_to(content_tag(:span,'', class:"glyphicon glyphicon-chevron-down"), admin_employees_path) %></button>
+          <div class="sect-header"> <%= current_admin_section %>
+            <button class="sect-btn">
+              <%= link_to(content_tag(:span,'', class:"glyphicon glyphicon-chevron-down"), admin_index_path) %>
+            </button>
           </div>
+
           <%= yield %>
           
-          <%= render partial: "admin/collection_admin_table",
-          locals: {sect: admin_control[current_admin_section.to_sym] } %>
+              <%= render partial: "admin/collection_admin_table",
+              locals: {sect: admin_control[current_admin_section.to_sym], collection: admin_collection } %>
+
         </div>
+        <% end %>
+        
+           <%# All Collapsed Sections %>
+        <% available_admin_sections.each do |sect| %>
+            <% if sect != current_admin_section %>
+              <div class="sect-bkgrnd">
+                <div class="sect-header"> <%= sect.gsub("_"," ") %>
+                  <button class="sect-btn"><%= current_admin_section_link(sect) %></button>
+                </div>
+              </div>
+            <% end %>
+        <% end %>
     </div>
-   
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>

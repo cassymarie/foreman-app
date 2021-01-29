@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Foreman App | Admin</title>
+    <title>Foreman App | Site Crews </title>
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -32,22 +32,8 @@
     
     <div class="container-fluid wrapper">
       <%= render partial: "layouts/flash"%>
-        <div  class="btn-group" role="group" aria-label="Button group with nested dropdown">
-          <div class="btn-group" role="group">
-            <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Jobsites <span class="glyphicon glyphicon-chevron-down"></span>
-            </button>
-            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-              <%= link_to 'New Jobsite', new_admin_jobsite_path, class: 'dropdown-item' %>
-              <a class="dropdown-item" href="#">Dropdown link</a>
-            </div>
-          </div>
-        </div>
- 
+
         <div class="sect-bkgrnd">
-          <div class="sect-header"> Jobsites
-            <button class="sect-btn"><%= link_to(content_tag(:span,'', class:"glyphicon glyphicon-chevron-down"), admin_employees_path) %></button>
-          </div>
           <%= yield %>
         </div>
     </div>

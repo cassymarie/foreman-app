@@ -82,3 +82,14 @@ background-color:rgba(223, 189, 220, 0.5);
 .main {
     width: 75%
 }
+
+.info-text {
+    color: red;
+    font-style: italic;
+    font-style: 20px;
+    text-align: center;
+}
+
+.search {
+    padding: 15px;
+}

@@ -1,4 +1,4 @@
-<% if sect[:collection].size > 0 %>
+<% if collection.size > 0 %>
 <div class="table-responsive">
     <table class="table table-hover">
         <thead>
@@ -13,7 +13,7 @@
         </thead>
         <tbody>
             <%# Data for the Table %>
-            <% sect[:collection].each do |item| %>
+            <% collection.each do |item| %>
                 <tr>
                     <td class="tbl-edit">
                         <%= edit_admin_item_link(item) %>
