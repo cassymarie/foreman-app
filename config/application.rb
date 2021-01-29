@@ -16,7 +16,7 @@ require "sprockets/railtie"
 
 # dependencies for bootstrap
 require "bootstrap"
-require 'date'
+require "date"
 
 
 

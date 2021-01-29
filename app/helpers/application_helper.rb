@@ -1,15 +1,4 @@
 module ApplicationHelper
-    def error_message(model)
-        message = html_escape('')
-        if error = model.errors
-            error.full_messages.each do |e|
-                message << content_tag(:p, e)
-            end
-            message << content_tag('br')
-            message
-        end
-    end
-
     def page_title
         case params[:controller]
         when 'jobsites'
@@ -31,14 +20,6 @@ module ApplicationHelper
         a = params[:action]
         list = html_escape('')
         case params[:controller]
-        when 'users','admin'
-            if a == 'new'
-              return  list << link_to('Log In', signin_path)
-            else
-                list << link_to('Jobsites', jobsites_path)
-            end
-        when 'sessions'
-            return list << link_to('Sign Up', new_user_path)
         when 'admin'
             list << link_to('Admin(test)', dashboard_root_path)
         when 'jobsites','jobs','tasks','employees','time_entries'
@@ -78,6 +59,11 @@ module ApplicationHelper
     def current_jobsite
         @jobsite = Jobsite.find_by(id: params[:jobsite_id]) || Jobsite.find_by(id: params[:id])
     end
+
+    def special_views
+        ['by_jobs','by_employees','by_hours','by_areas']
+    end
+
 
 end
 

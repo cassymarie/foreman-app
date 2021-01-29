@@ -1,7 +1,8 @@
 class EmployeesController < ApplicationController
     include ApplicationHelper
     include JobsitesHelper
-
+    layout "jobsite"
+    
     before_action :authentication_required
     before_action :user_jobsites, except: [:index, :new]
     before_action :current_jobsite

@@ -1,0 +1,15 @@
+
+    <div class="form-header trans-sm">Add Employee
+        <button class="close-btn">
+            <%= link_to(content_tag(:span,'', class:"glyphicon glyphicon-remove"),jobsite_jobs_path(@jobsite)) %>
+        </button>
+    </div>
+    <div class='container-fluid center'>
+    <%= form_with model: @jobsite.employees.build, url: jobsite_employee_index_path do |f| %>
+        <%= f.select :id, Employee.active.collect { |u| [ u.full_name, u.id ] }, 
+                    input_html: {id: 'dropdown-choice-select'}, include_blank: true  %>
+        <%= button_tag(type: 'submit', class: "ok-btn", id: 'validForm') do %>
+            <span class="glyphicon glyphicon-ok"></span>
+        <% end %>
+    <% end %>
+    </div>

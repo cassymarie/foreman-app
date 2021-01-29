@@ -4,10 +4,11 @@ class JobsitesController < ApplicationController
     before_action :authentication_required
     before_action :user_jobsites, except: [:index, :new]
     before_action :current_jobsite
-    layout "dashboard", only: [:testing]
+    layout "application" #, only: [:index]
+    #layout "jobsite", only: [:show]
 
     def index
-       @jobsites = @current_user.admin == true ? Jobsite.all.current : @current_user.jobsites
+       @jobsites = @current_user.admin == true ? Jobsite.all.active : @current_user.jobsites
        if @jobsites.size == 1
             redirect_to jobsite_path(@jobsites[0])
        end
@@ -21,6 +22,7 @@ class JobsitesController < ApplicationController
     end
 
     def show
+        @jobsites = @current_user.admin == true ? Jobsite.all.active : @current_user.jobsites
     end
 
     def edit

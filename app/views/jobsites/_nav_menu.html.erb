@@ -1,0 +1,12 @@
+<ul class="nav nav-tabs">
+    <li role="presentation" class=<%=active_button('index')%>>
+        <%= link_to 'Info', "/jobsite/#{@jobsite.id}/#{current_section.downcase}"%>
+    </li>
+
+    <% nav.map do |btn| %>
+        <% label = btn.remove('by_').capitalize %>
+            <li role="presentation" class=<%=active_button(btn)%>>
+                <%= link_to label, "/jobsite/#{@jobsite.id}/#{current_section.downcase}/#{btn}"%>
+            </li>
+    <% end %>
+</ul>

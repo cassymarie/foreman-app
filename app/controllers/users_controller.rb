@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+    include SessionsHelper
+    layout "login"
     before_action :authentication_required, only: [:show]
 
     def new

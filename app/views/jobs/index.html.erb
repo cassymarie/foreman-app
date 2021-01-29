@@ -1,7 +1,3 @@
-<div class="center">
-  <%= render partial: "jobsites/collection_table", locals: {jobsite: @jobsite, collection: @jobsite.jobs, view_by: table_view_by, show: 'jobs', editable: edit_table, customer: show_customer, job_areas: show_areas} %>
-</div>
-
 
  <button class="edit-btn"><%= link_to(content_tag(:span,'', class:"glyphicon glyphicon-plus")+ ' Add Job',new_jobsite_job_path(@jobsite)) %></button>
 

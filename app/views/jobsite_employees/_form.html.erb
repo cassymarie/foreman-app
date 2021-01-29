@@ -1,5 +1,0 @@
-    <h2 class="form_header"><%=form_title%> Employee</h2>
-    <%= form_with model: @jobsite.employees.build, url: jobsite_employee_index_path do |f| %>
-    <%= f.select :id, Employee.active.collect { |u| [ u.full_name, u.id ] }, input_html: {id: 'dropdown-choice-select'}, include_blank: true  %>
-    <%= f.submit 'Add to Crew' %>
-    <% end %>

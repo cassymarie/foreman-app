@@ -15,28 +15,26 @@
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag 'reset'%>
     <%= stylesheet_link_tag 'header'%>
+    <%= stylesheet_link_tag 'signin'%>
     <%= stylesheet_link_tag 'main_app'%>
     
-    
-
   </head>
   <body>
-    <%= render partial: "layouts/flash"%>
-
+    
     <header>
        <%= render partial: "layouts/header"%>
     </header>
     
     <div class="container-fluid wrapper">
+    <%= render partial: "layouts/flash"%>
       <%= yield %> 
     </div>
    
-
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>

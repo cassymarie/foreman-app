@@ -1,7 +1,7 @@
 class JobsiteEmployeesController < ApplicationController
     include JobsitesHelper
     before_action :current_jobsite
-
+    layout "jobsite"
     def new
     end
 
@@ -9,7 +9,7 @@ class JobsiteEmployeesController < ApplicationController
         employee = Employee.find(params[:employee][:id])
 
         if @jobsite.employees.include?(employee)    
-            flash[:alert] = "#{employee.full_name} is already part of the Crew." 
+            flash[:notice] = "#{employee.full_name} is already part of the Crew." 
         else
             @jobsite.employees << employee
         end

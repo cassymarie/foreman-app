@@ -2,7 +2,7 @@ class JobsController < ApplicationController
     include ApplicationHelper
     include JobsitesHelper
     
-    layout "jobs"
+    layout "jobsite"
     before_action :authentication_required
     before_action :current_jobsite
     before_action :set_variables
@@ -25,6 +25,7 @@ class JobsController < ApplicationController
     def by_areas
         render :index
     end
+    
     def new_area
     end
 
@@ -32,7 +33,7 @@ class JobsController < ApplicationController
         add_to_jobs = params[:area][:jobs][:id]
 
         if add_to_jobs.nil? 
-            flash[:alert] = 'You must select at least ONE job to apply the new code to.'
+            flash[:notice] = 'You must select at least ONE job to apply the new code to.'
             redirect_to jobsite_jobs_path(@jobsite)
         end
 
@@ -44,7 +45,7 @@ class JobsController < ApplicationController
         end
 
         if !area.save
-            area.errors.full_messages.map {|err| flash[:alert] = err} unless area.errors.nil?
+            area.errors.full_messages.map {|err| flash[:notice] = err} unless area.errors.nil?
         end
 
         render :index
@@ -62,7 +63,7 @@ class JobsController < ApplicationController
 
         redirect_to jobsite_jobs_path(@jobsite) unless !@job.save
 
-        @job.errors.full_messages.map {|err| flash[:alert] = err} unless @job.errors.nil?
+        @job.errors.full_messages.map {|err| flash[:notice] = err} unless @job.errors.nil?
         render :index
     end
 

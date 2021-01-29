@@ -13,10 +13,10 @@ Rails.application.routes.draw do
   #Google path
   get '/auth/google_oauth2/callback'=> 'sessions#omniauth'  
 
-  resources :jobsites, only: [:index, :show]
+  resources :jobsites, only: [:index]
   
   #Nested under jobsites
-  resources :jobsite, only: [:new, :edit, :create], controller: 'jobsites' do 
+  resources :jobsite, only: [:show, :new, :edit, :create], controller: 'jobsites' do 
     resources :jobs, only: [:index]
     get 'jobs/by_hours' => 'jobs#by_hours'
     get 'jobs/by_employees' => 'jobs#by_employees'
