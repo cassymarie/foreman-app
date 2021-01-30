@@ -5,11 +5,11 @@ TITLES = ["Foreman", "Apprentice", "Mechanic", "Superintendent", "Helper", "Joun
 
 TITLES.each{|t| Title.create(title: t)}
 
-250.times do 
+150.times do 
     Employee.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, title_id:rand(1..7) )
 end
 
-10.times do
+5.times do
     Jobsite.create(name: Faker::IndustrySegments.sector, city: Faker::Address.city, state: Faker::Address.state_abbr)
     Jobsite.create(name: Faker::App.name, city: Faker::Address.city, state: Faker::Address.state_abbr)
     Jobsite.create(name: Faker::Space.galaxy, city: Faker::Address.city, state: Faker::Address.state_abbr)
@@ -17,15 +17,15 @@ end
 
 Area.create(code: '000', name: 'General')
 
-200.times do 
-    Job.create(job_number:rand(4501..9998), name: Faker::App.name, customer: Faker::Company.name, jobsite_id:rand(1..30))
+50.times do 
+    Job.create(job_number:rand(4501..9998), name: Faker::App.name, customer: Faker::Company.name, jobsite_id:rand(1..15))
 end
 
 150.times do
-    Task.create(code:rand(200..298), name: Faker::Hipster.sentence(word_count: rand(1..2), supplemental: false, random_words_to_add: rand(0..2)) , jobsite_id:rand(1..30))
+    Task.create(code:rand(200..298), name: Faker::Hipster.sentence(word_count: rand(1..2), supplemental: false, random_words_to_add: rand(0..2)) , jobsite_id:rand(1..15))
 end
 
-100.times do
+50.times do
     Area.create(code: Faker::Alphanumeric.alphanumeric(number: 3).upcase!, 
     name: Faker::Hipster.sentence(word_count: rand(1..2), supplemental: false, random_words_to_add: rand(0..1)) 
     )
@@ -53,19 +53,19 @@ DATA[:users].each do |user|
 end
 
 35.times {
-    UserJobsite.create(user_id:rand(5..13), jobsite_id: rand(1..30))
+    UserJobsite.create(user_id:rand(5..13), jobsite_id: rand(1..15))
 }
 
 admin1 = User.create(first_name:'Frank', last_name:'Dukes', email:'frank@email.com', password:'password', provider:'email', admin: true)
 admin2 = User.create(first_name:'Amanda', last_name:'Mitchell', email:'amanda@email.com', password:'password', provider:'email', admin: true)
 
-5.times{
-    UserJobsite.create(user_id: admin1.id, jobsite_id: rand(1..30))
-    UserJobsite.create(user_id: admin2.id, jobsite_id: rand(1..30))
+3.times{
+    UserJobsite.create(user_id: admin1.id, jobsite_id: rand(1..15))
+    UserJobsite.create(user_id: admin2.id, jobsite_id: rand(1..15))
 }
 
 Employee.all.each do |e|
-    JobsiteEmployee.create(employee_id: e.id, jobsite_id:rand(1..30))
+    JobsiteEmployee.create(employee_id: e.id, jobsite_id:rand(1..15))
 end
 
 EntryType.create(code: 'R', description: 'Regular Time')
@@ -79,7 +79,7 @@ end
 
 1000.times {
     rand_job = rand(1..50)
-    employee = rand(1..250)
+    employee = rand(1..150)
     job = Job.find_by(id: rand_job)
     jobsite = job.jobsite
     num = rand(0.5..8.0).round(2)
