@@ -74,3 +74,24 @@ body {
     margin: auto;
     vertical-align: super;
 }
+
+.site-user-well {
+    padding: 10px;
+}
+
+.jobsite-user {
+    display: flex;
+    margin-bottom: 3px;
+}
+
+.user-name {
+    margin-left: 2px;
+}
+
+.site-user {
+    font-size: small;
+    border: none;
+    color: darkred;
+    text-align: right;
+    background-color: transparent;
+}

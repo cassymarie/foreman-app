@@ -93,3 +93,10 @@ background-color:rgba(223, 189, 220, 0.5);
 .search {
     padding: 15px;
 }
+
+.no-records {
+    color: darkred;
+    padding: 20px;
+    text-align: center;
+    font-size: 20px;
+}

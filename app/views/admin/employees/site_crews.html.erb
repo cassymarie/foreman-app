@@ -4,7 +4,7 @@
         <div class="admin-card-title jobsite-id_<%=jobsite.id%>"> 
             <%= link_to jobsite.name, jobsite_path(jobsite)%>
             <div class="card-edit jobsite-id_<%=jobsite.id%>"> 
-                <%= link_to content_tag(:span,'', class: "glyphicon glyphicon-pencil"), jobsite_jobs_path(jobsite) %>
+                <%= link_to content_tag(:span,'', class: "glyphicon glyphicon-pencil"), edit_admin_jobsite_path(jobsite) %>
             </div>
         </div>
         <% show = jobsite.crew_size > 10 ? 'multi' : '' %>

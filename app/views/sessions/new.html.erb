@@ -7,11 +7,8 @@
         <%= f.password_field :password, placeholder: "Password", class:"form-control login-input" %>
         <%= f.submit 'Sign In',  class:"btn-default login-btn" %>
     </div>
-    <button class="omni-btn btn-default">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" class="google-icon">
-            <label class="google-text"> Login with Google </label>
-    </button>
+    
     <% end %>
-
+    <%= button_to "Log in with Google", "/auth/google_oauth2",  class:"omni-btn btn-default"%> 
 <%= link_to "Create New User", new_user_path, class: "ref-link" %>
 

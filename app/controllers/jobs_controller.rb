@@ -61,10 +61,12 @@ class JobsController < ApplicationController
 
         add_areas.collect { |area| @job.areas << Area.find(area.to_i) }
 
-        redirect_to jobsite_jobs_path(@jobsite) unless !@job.save
-
-        @job.errors.full_messages.map {|err| flash[:notice] = err} unless @job.errors.nil?
-        render :index
+        if @job.save
+            redirect_to jobsite_jobs_path(@jobsite)
+        else
+            @job.errors.full_messages.map {|err| flash[:notice] = err} unless @job.errors.nil?
+            render :index
+        end
     end
 
     def update
@@ -85,7 +87,6 @@ class JobsController < ApplicationController
 
     private
     def jobs_params
-        binding.pry
         params.require(:job).permit(:id, :job_number, :name, :customer, :jobsite_id, areas_attributes:  [:code, :name, :jobs])
     end
 

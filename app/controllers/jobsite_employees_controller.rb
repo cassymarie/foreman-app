@@ -18,8 +18,8 @@ class JobsiteEmployeesController < ApplicationController
 
     def destroy
         remove = JobsiteEmployee.find_by(jobsite_id:params[:jobsite_id], employee_id:params[:id])
-            remove.destroy unless remove.nil?
-            redirect_to jobsite_employees_path(@jobsite)
+        remove.destroy unless remove.nil?
+        redirect_to jobsite_employees_path(@jobsite)
     end
     
 end

@@ -5,11 +5,13 @@
     </div>
     <div class="form-dbl">
         <div class="form-sect main">
-            <%= form_with model: @jobsite, url: admin_jobsites_path do |f| %>
+            <%= form_with model: @jobsite, url: admin_jobsite_path(@jobsite) do |f| %>
                 <%= render partial: 'form', locals: {jobsite: @jobsite, f: f} %>
             <% end %>
         </div>
         <div class="form-sect side">
+        <div class="form-label">Jobsite Access</div>
+            <%= render partial: 'admin/user_jobsites/curr_users', locals: {jobsite: @jobsite} %>
             <%= render partial: 'admin/user_jobsites/form', locals: {jobsite: @jobsite} %>
         </div>
     </div>

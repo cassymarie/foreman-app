@@ -126,6 +126,7 @@ body{
 
 .edit-btn {
   margin: 10px;
+  width: fit-content;
 }
 
 .sub-btn {

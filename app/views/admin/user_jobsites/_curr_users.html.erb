@@ -1,0 +1,10 @@
+<div class="well site-user-well">
+    <% @jobsite.users.each do |user| %>
+        <div class="jobsite-user">
+            <div>
+                <%= button_to 'X', admin_jobsite_jobsite_path(@jobsite,user), method: :delete, class: 'site-user' %>
+            </div>
+            <div class="user-name"><%= user.full_name %></div>
+        </div>
+    <% end %>
+</div>

@@ -1,5 +1,4 @@
-
-    <div class='container-fluid form-sect'>
+    <div class='form-sect'>
         <div class="form-group">
             <div class="form-group col-xs-3">
                 <%= f.label :first_name, class: "form-label" %>
@@ -9,13 +8,14 @@
                 <%= f.label :last_name, class: "form-label" %>
                 <%= f.text_field :last_name,  class: "form-control", placeholder: "(eg. Smith)" %>
             </div>
+            <div class="form-group col-xs-3">
+                <%= f.fields_for :title_id do |e| %>
+                    <%= e.label :title, class: "form-label" %>
+                    <%= e.select :id, Title.all.collect { |t| [ t.title, t.id ] }, 
+                        input_html: {id: 'dropdown-choice-select',  class: "form-control"}, include_blank: true, value: :title_id %>
+                <% end %>
+            </div>
         </div>
-        <div class="form-group col-xs-7">
-            <%= f.fields_for :title_id do |e| %>
-                <%= e.select :id, Title.all.collect { |t| [ t.title, t.id ] }, 
-                    input_html: {id: 'dropdown-choice-select'}, include_blank: true %>
-            <% end %>
-        </div>
-        
+        <%= f.submit :class => 'edit-btn' %> 
     </div>
-<%= f.submit :class => 'edit-btn' %>
+    

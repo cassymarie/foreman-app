@@ -69,11 +69,18 @@ module AdminHelper
          item[info]
        end 
     end
+
     def admin_collection
         if current_admin_section == 'Jobsites'
             @jobsites
         else
             @employees
+        end
+    end
+
+    def remove_user(jobsite, user)
+        button_to jobsite_employee_path(jobsite_id: @jobsite.id, id: item.id), { method: :delete, remote: true, class: "remove-btn", controller: 'jobsite_employees' }  do 
+            content_tag(:span,'', class:"glyphicon glyphicon-remove")
         end
     end
 end
