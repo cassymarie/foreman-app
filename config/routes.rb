@@ -42,11 +42,14 @@ Rails.application.routes.draw do
 
   resources :admin, only: [:index]
   namespace :admin  do 
-    resources :jobsites, except: [:show]
+    resources :jobsites, except: [:show] do
+      resources :user_jobsites, only: [:destroy], as: 'jobsite', controller: 'user_jobsites'
+    end
     get 'site_crews' => 'employees#site_crews'
     resources :employees, except: [:show]
     get 'employees/search' => 'employees#search'
-    resources :user_jobsites, only: [:create, :destroy], as: 'jobsite', controller: 'user_jobsites'
+    resources :user_jobsites, only: [:create], as: 'jobsite', controller: 'user_jobsites'
+    #delete 'user_jobsites/:jobsite_id/:id' => 'user_jobsites#remove'
   end
 
 end

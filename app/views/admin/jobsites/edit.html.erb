@@ -10,6 +10,8 @@
             <% end %>
         </div>
         <div class="form-sect side">
+        <div class="form-label">Jobsite Access</div>
+            <%= render partial: 'admin/user_jobsites/curr_users', locals: {jobsite: @jobsite} %>
             <%= render partial: 'admin/user_jobsites/form', locals: {jobsite: @jobsite} %>
         </div>
     </div>

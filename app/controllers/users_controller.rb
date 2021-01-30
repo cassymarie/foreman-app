@@ -2,16 +2,11 @@ class UsersController < ApplicationController
     include SessionsHelper
     layout "login"
     before_action :authentication_required, only: [:show]
+    skip_before_action :verify_authenticity_token
 
     def new
         @user = User.new
-        #binding.pry
     end
-
-    # def show
-    #     @user = User.find(params[:id])
-    #     @jobsites = @user.jobsites
-    # end
 
     def create
         @user = User.new(user_params)
@@ -23,8 +18,8 @@ class UsersController < ApplicationController
             redirect_to jobsites_path
         else
             alert = ''
-            @user.errors.full_messages.each {|err| alert.unshift "#{flash[:alert] = err}"} unless @user.errors.nil?
-            flash[:alert] = alert.unshift
+            @user.errors.full_messages.each {|err| alert += "#{flash[:alert] = err}... "} unless @user.errors.nil?
+            flash[:alert] = alert
             render new_user_path
         end
     end
@@ -38,28 +33,3 @@ class UsersController < ApplicationController
     end
 
   end
-
-# class UserController < ApplicationController
-
-#     #View Main Sign-Up Page
-#     get '/signup' do
-#         erb :'users/new', :layout => :'layouts/layout_signin'
-#     end
-
-#     get '/error' do
-#         erb :error, :layout => :'layouts/layout_signin'
-#     end
-
-#     #Create a new user (if valid)
-#     post '/signup' do
-#         @user = User.new(params[:user])
-#         if @user.save
-#             session[:user_id] = @user.id
-#             redirect to '/jobsites'
-#         else
-#             @error = @user.errors.full_messages.join(" - ")
-#             erb :'users/new', :layout => :'layouts/layout_signin'
-#         end
-#     end
-
-# end

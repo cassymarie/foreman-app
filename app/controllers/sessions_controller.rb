@@ -1,11 +1,14 @@
 class SessionsController < ApplicationController
     include ApplicationHelper
     layout "login"
+    skip_before_action :verify_authenticity_token
+    
 
     def new
         redirect_to jobsites_path unless !logged_in?
         @user = User.new
     end
+    
     #Google Omniauth Callback
     def omniauth
        user = User.find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |u|
